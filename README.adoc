@@ -1,0 +1,35 @@
+
+:rootdir: ./
+:docpage: http://jmini.github.io/asciidoctorj-gh-edit
+:issues: https://github.com/jmini/asciidoctorj-gh-edit/issues
+:setup: https://raw.githubusercontent.com/jmini/asciidoctorj-gh-edit/master/AsciidoctorjGhEdit.setup
+:src: https://github.com/jmini/asciidoctorj-gh-edit/tree/master/src
+:license: http://www.eclipse.org/legal/epl-v10.html
+
+Asciidoctorj extension to create a link "Edit on GitHub".
+
+ifndef::completedoc[]
+See the link:{docpage}[documentation]. 
+endif::completedoc[]
+
+ifdef::completedoc[]
+include::{rootdir}src/docs/asciidoc/_documentation.adoc[]
+endif::completedoc[]
+
+== Code
+
+As for any maven plugin, the source code of the plugin is available in the link:{src}[src/] folder.
+
+=== Build
+
+Run maven install on the root pom file:
+
+  mvn install
+
+== Get in touch
+
+Use the link:{issues}[asciidoctorj-gh-edit issue tracker] on GitHub.
+
+== License
+
+link:{license}[Eclipse Public License - v 1.0]

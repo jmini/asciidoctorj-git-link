@@ -1,0 +1,1 @@
+Please gh-edit:jmini/asciidoctorj-gh-edit[master, edit this page] on GitHub.

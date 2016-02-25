@@ -1,0 +1,11 @@
+
+ifndef::rootdir[:rootdir: ../../../]
+ifndef::srcdir[:srcdir: ../../]
+:completedoc:
+
+= gh-edit[] Documentation
+Jeremie Bresson
+:revdate: {project-builddate}
+:revnumber: {project-version}
+
+include::{rootdir}README.adoc[]
