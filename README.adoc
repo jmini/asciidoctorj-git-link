@@ -20,6 +20,8 @@ endif::completedoc[]
 
 As for any maven plugin, the source code of the plugin is available in the link:{src}[src/] folder.
 
+If you are using the Eclipse Installer (Oomph) you can use the `AsciidoctorjGhEdit.setup` File (link:{setup}[url]) to setup your IDE properly.
+
 === Build
 
 Run maven install on the root pom file:
