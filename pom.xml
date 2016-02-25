@@ -53,7 +53,9 @@
 <!-- tag::mvn-plugin[] -->
   <build>
     <plugins>
+<!-- end::mvn-plugin[] -->
       <!-- Use asciidoctor to build the documentation -->
+<!-- tag::mvn-plugin[] -->
       <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>

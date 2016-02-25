@@ -2,6 +2,13 @@
 ifndef::srcdir[:srcdir: ../../]
 :rootdir: ../../../
 
+Links:
+
+* link:https://jmini.github.io/asciidoctorj-gh-edit/[Project home] (this page)
+* link:https://github.com/jmini/asciidoctorj-gh-edit/[GitHub project]
+* link:https://bintray.com/jmini/maven/asciidoctorj-gh-edit[Binaries on Bintray]
+* link:https://github.com/jmini/asciidoctorj-gh-edit/issues[Issue tracker]
+
 == Usage
 
 If you want to use the extension in your code, just write `gh-edit`.
@@ -9,7 +16,7 @@ The first argument represents the coordinates of your repository on GitHub (patt
 Depending on the case `<user>` might be a GitHub user name or a GitHub organization name.
 For this repository it would be `jmini/gh-edit-asciidoctorj`.
 
-In oder for the plugin to work, the file that is processed (value taken from the `{docfile}` attribute) needs to be located in one folder having the value defined by `<git-repository>` as name.
+In oder for the plugin to work, the file that is processed (value taken from the asciidoctor `docfile` attribute) needs to be located in one folder having the value defined by `<git-repository>` as name.
 For a file in this repository, this would for example a valid path:
 
     C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc
