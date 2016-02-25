@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bsiag.asciidoctorj</groupId>
   <artifactId>gh-edit</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <properties>
     <!-- maven versions -->
     <asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
@@ -62,7 +62,7 @@
           <dependency>
             <groupId>com.bsiag.asciidoctorj</groupId>
             <artifactId>gh-edit</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1-SNAPSHOT</version>
           </dependency>
           <!-- ... (other dependencies) -->
 <!-- end::mvn-plugin[] -->
@@ -167,7 +167,7 @@
     <connection>scm:git:https://github.com/jmini/asciidoctorj-gh-edit.git</connection>
     <developerConnection>scm:git:git@github.com:jmini/asciidoctorj-gh-edit.git</developerConnection>
     <url>https://github.com/jmini/asciidoctorj-gh-edit</url>
-    <tag>v1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <repository>
