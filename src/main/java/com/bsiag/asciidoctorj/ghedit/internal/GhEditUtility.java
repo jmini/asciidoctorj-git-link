@@ -17,40 +17,16 @@ public final class GhEditUtility {
   static final String WARN_FILE_UNKNWON = "gh-edit: Adoc file is not known";
   static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{repository}, current value: ";
 
-  public static GhEditLink compute(String repository, Object textParam, String file) {
+  public static GhEditLink compute(String repository, Object branch, Object linkText, String file) {
     GhEditLink result = new GhEditLink();
 
-    String text;
-    String branch;
-    if (textParam == null) {
-      text = DEFAULT_TEXT;
-      branch = DEFAULT_BRANCH;
+    //text:
+    if (linkText == null || linkText.toString().isEmpty()) {
+      result.setText(DEFAULT_TEXT);
     }
     else {
-      String param = textParam.toString();
-      if (param.isEmpty()) {
-        text = DEFAULT_TEXT;
-        branch = DEFAULT_BRANCH;
-      }
-      else {
-        String[] parts = param.split(",");
-        if (parts.length > 1) {
-          text = parts[1].trim();
-        }
-        else {
-          text = DEFAULT_TEXT;
-        }
-        if (parts.length > 0) {
-          branch = parts[0].trim();
-        }
-        else {
-          branch = DEFAULT_BRANCH;
-        }
-      }
+      result.setText(linkText.toString());
     }
-
-    //text:
-    result.setText(text);
 
     //Repository:
     if (repository == null || repository.isEmpty()) {
@@ -70,7 +46,12 @@ public final class GhEditUtility {
           sb.append("https://github.com/");
           sb.append(repository);
           sb.append("/edit/");
-          sb.append(branch);
+          if (branch == null || branch.toString().isEmpty()) {
+            sb.append(DEFAULT_BRANCH);
+          }
+          else {
+            sb.append(branch.toString());
+          }
           sb.append(file.substring(j + repositoryName.length()).replaceAll("\\\\", "/"));
           result.setUrl(sb.toString());
         }

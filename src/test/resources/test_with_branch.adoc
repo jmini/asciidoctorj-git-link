@@ -1,1 +1,0 @@
-Click on the gh-edit:jmini/asciidoctorj-gh-edit[patch-1] link.

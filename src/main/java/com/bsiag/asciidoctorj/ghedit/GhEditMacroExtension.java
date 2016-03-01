@@ -10,6 +10,11 @@
  ******************************************************************************/
 package com.bsiag.asciidoctorj.ghedit;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.extension.JavaExtensionRegistry;
 import org.asciidoctor.extension.spi.ExtensionRegistry;
@@ -20,6 +25,11 @@ public class GhEditMacroExtension implements ExtensionRegistry {
   public void register(Asciidoctor asciidoctor) {
     JavaExtensionRegistry javaExtensionRegistry = asciidoctor.javaExtensionRegistry();
 
-    javaExtensionRegistry.inlineMacro("gh-edit", GhEditMacro.class);
+    Map<String, Object> options = new HashMap<String, Object>();
+    options.put("content_model", ":attributes");
+    options.put("pos_attrs", new ArrayList<String>(Arrays.asList(":branch", ":link-text")));
+    GhEditMacro macro = new GhEditMacro("gh-edit", options);
+
+    javaExtensionRegistry.inlineMacro(macro);
   }
 }

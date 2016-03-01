@@ -30,7 +30,10 @@ public class GhEditMacro extends InlineMacroProcessor {
   @Override
   protected Object process(AbstractBlock parent, String repository, Map<String, Object> attributes) {
     String docFile = searchDocFile(parent);
-    GhEditLink link = GhEditUtility.compute(repository, attributes.get("text"), docFile);
+
+    Object branch = searchAttribute(attributes, "branch", 1);
+    Object linkText = searchAttribute(attributes, "link-text", 2);
+    GhEditLink link = GhEditUtility.compute(repository, branch, linkText, docFile);
 
     if (link.getWarning() != null) {
       //TODO: log a warning containing link.getWarning()
@@ -51,6 +54,22 @@ public class GhEditMacro extends InlineMacroProcessor {
       // Convert to String value:
       return inline.convert();
     }
+  }
+
+  private Object searchAttribute(Map<String, Object> attributes, String attrKey, int attrPosition) {
+    Object result;
+    //Try to get the attribute by key:
+    result = attributes.get(attrKey);
+    if (result != null) {
+      return result;
+    }
+    //Try to get the attribute by position:
+    result = attributes.get(attrPosition);
+    if (result != null) {
+      return result;
+    }
+    //Not found:
+    return null;
   }
 
   /**

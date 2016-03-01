@@ -1,0 +1,1 @@
+Please gh-edit:jmini/asciidoctorj-gh-edit[branch='gh-pages', link-text='edit a page'] on GitHub.

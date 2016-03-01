@@ -31,13 +31,28 @@ public class GhEditTest {
   }
 
   @Test
-  public void testWithBranch() throws Exception {
-    runTest("test_with_branch");
+  public void testWithBranch1() throws Exception {
+    runTest("test_with_branch-1");
+  }
+
+  @Test
+  public void testWithBranch2() throws Exception {
+    runTest("test_with_branch-2");
   }
 
   @Test
   public void testWithLinkText() throws Exception {
     runTest("test_with_link_text");
+  }
+
+  @Test
+  public void testWithAll1() throws Exception {
+    runTest("test_with_all-1");
+  }
+
+  @Test
+  public void testWithAll2() throws Exception {
+    runTest("test_with_all-2");
   }
 
   private void runTest(String fileName) throws IOException, URISyntaxException {

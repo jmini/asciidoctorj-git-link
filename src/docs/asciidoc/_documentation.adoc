@@ -14,9 +14,9 @@ Links:
 If you want to use the extension in your code, just write `gh-edit`.
 The first argument represents the coordinates of your repository on GitHub (pattern: `<user>/<git-repository>`).
 Depending on the case `<user>` might be a GitHub user name or a GitHub organization name.
-For this repository it would be `jmini/gh-edit-asciidoctorj`.
+For this repository it would be `jmini/asciidoctorj-gh-edit`.
 
-In oder for the plugin to work, the file that is processed (value taken from the asciidoctor `docfile` attribute) needs to be located in one folder having the value defined by `<git-repository>` as name.
+In order for the plugin to work, the file that is processed (value taken from the asciidoctor `docfile` attribute) needs to be located in one folder having the value defined by `<git-repository>` as name.
 For a file in this repository, this would for example a valid path:
 
     C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc
@@ -34,23 +34,30 @@ include::{srcdir}test/resources/test_simple.adoc[]
 include::{srcdir}test/resources/test_simple.adoc[]
 ====
 
+The extension accept two optional arguments:
+
+`branch` :: name of the git branch. Default is `master`
+`link-text` :: text used as text. Default is "edit on GitHub"
+
+The rest of this section is illustrated with some examples.
+
 When no branch is defined, the link will point to the file in the `master` branch.
 But you can also specify an other branch as the first argument in the squared brackets.
 
-.Example with specific branch.
+.Example with specific branch as first argument (named attribute)
 [source,asciidoc]
 ----
-include::{srcdir}test/resources/test_with_branch.adoc[]
+include::{srcdir}test/resources/test_with_branch-1.adoc[]
 ----
 
 .Output (example with specific branch)
 ====
-include::{srcdir}test/resources/test_with_branch.adoc[]
+include::{srcdir}test/resources/test_with_branch-1.adoc[]
 ====
 
-You can also change the link text.
+You can also change the link text:
 
-.Example with custom link text.
+.Example with custom link text (named attribute)
 [source,asciidoc]
 ----
 include::{srcdir}test/resources/test_with_link_text.adoc[]
@@ -59,6 +66,19 @@ include::{srcdir}test/resources/test_with_link_text.adoc[]
 .Output (example with custom link text)
 ====
 include::{srcdir}test/resources/test_with_link_text.adoc[]
+====
+
+Of course you can combined both options:
+
+.Example with custom link text (position attributes)
+[source,asciidoc]
+----
+include::{srcdir}test/resources/test_with_all-1.adoc[]
+----
+
+.Output (example with both)
+====
+include::{srcdir}test/resources/test_with_all-1.adoc[]
 ====
 
 === Add the extension to your pom.xml file
