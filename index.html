@@ -515,8 +515,8 @@ table.CodeRay td.code>pre{padding:0}
 <h1>gh-edit[] Documentation</h1>
 <div class="details">
 <span id="author" class="author">Jeremie Bresson</span><br>
-<span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2016-02-25</span>
+<span id="revnumber">version 1.0.1,</span>
+<span id="revdate">2016-03-05</span>
 </div>
 </div>
 <div id="content">
@@ -553,16 +553,21 @@ table.CodeRay td.code>pre{padding:0}
 <p>If you want to use the extension in your code, just write <code>gh-edit</code>.
 The first argument represents the coordinates of your repository on GitHub (pattern: <code>&lt;user&gt;/&lt;git-repository&gt;</code>).
 Depending on the case <code>&lt;user&gt;</code> might be a GitHub user name or a GitHub organization name.
-For this repository it would be <code>jmini/gh-edit-asciidoctorj</code>.</p>
+For this repository it would be <code>jmini/asciidoctorj-gh-edit</code>.</p>
 </div>
 <div class="paragraph">
-<p>In oder for the plugin to work, the file that is processed (value taken from the asciidoctor <code>docfile</code> attribute) needs to be located in one folder having the value defined by <code>&lt;git-repository&gt;</code> as name.
+<p>In order for the plugin to work, the file that is processed (value taken from the asciidoctor <code>docfile</code> attribute) needs to be located in one folder having the value defined by <code>&lt;git-repository&gt;</code> as name.
 For a file in this repository, this would for example a valid path:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>There is one exception to this rule: if the file path (<code>docfile</code>) is located into 2 folders called <code>target/checkout</code>.
+In that case those folders are also considered as a possible git clone location.
+This might be useful during maven releases.</p>
 </div>
 <div class="paragraph">
 <p>The simplest usage is to have no additional parameters:</p>
@@ -582,13 +587,31 @@ For a file in this repository, this would for example a valid path:</p>
 </div>
 </div>
 <div class="paragraph">
+<p>The extension accept two optional arguments:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>branch</code> </dt>
+<dd>
+<p>name of the git branch. Default is <code>master</code></p>
+</dd>
+<dt class="hdlist1"><code>link-text</code> </dt>
+<dd>
+<p>text used as text. Default is "edit on GitHub"</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The rest of this section is illustrated with some examples.</p>
+</div>
+<div class="paragraph">
 <p>When no branch is defined, the link will point to the file in the <code>master</code> branch.
 But you can also specify an other branch as the first argument in the squared brackets.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example with specific branch.</div>
+<div class="title">Example with specific branch as first argument (named attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the gh-edit:jmini/asciidoctorj-gh-edit[patch-1] link.</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the gh-edit:jmini/asciidoctorj-gh-edit[branch='patch-1'] link.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
@@ -600,12 +623,12 @@ But you can also specify an other branch as the first argument in the squared br
 </div>
 </div>
 <div class="paragraph">
-<p>You can also change the link text.</p>
+<p>You can also change the link text:</p>
 </div>
 <div class="listingblock">
-<div class="title">Example with custom link text.</div>
+<div class="title">Example with custom link text (named attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh-edit:jmini/asciidoctorj-gh-edit[master, edit this page] on GitHub.</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh-edit:jmini/asciidoctorj-gh-edit[link-text=&quot;edit this page&quot;] on GitHub.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
@@ -613,6 +636,23 @@ But you can also specify an other branch as the first argument in the squared br
 <div class="content">
 <div class="paragraph">
 <p>Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/master/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Of course you can combined both options:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example with custom link text (position attributes)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh-edit:jmini/asciidoctorj-gh-edit[patch-1, edit this page] on GitHub.</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 4. Output (example with both)</div>
+<div class="content">
+<div class="paragraph">
+<p>Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/patch-1/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
 </div>
 </div>
 </div>
@@ -648,7 +688,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
           <span class="tag">&lt;dependency&gt;</span>
             <span class="tag">&lt;groupId&gt;</span>com.bsiag.asciidoctorj<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>gh-edit<span class="tag">&lt;/artifactId&gt;</span>
-            <span class="tag">&lt;version&gt;</span>1.0.0<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>1.0.1<span class="tag">&lt;/version&gt;</span>
           <span class="tag">&lt;/dependency&gt;</span>
           <span class="comment">&lt;!-- ... (other dependencies) --&gt;</span>
         <span class="tag">&lt;/dependencies&gt;</span>
@@ -703,8 +743,8 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0<br>
-Last updated 2016-02-25 06:09:24 CET
+Version 1.0.1<br>
+Last updated 2016-03-05 05:05:16 CET
 </div>
 </div>
 </body>
