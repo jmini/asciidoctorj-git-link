@@ -25,6 +25,16 @@ public class GhEditUtilityTest {
   private static final String WRONG_FILE = "test.txt";
 
   @Test
+  public void testComputeFilepath() throws Exception {
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath(FILE, "some-repo"));
+    assertEquals("/folder/TEXT.adoc", GhEditUtility.computeFilePath(SUB_FILE, "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("some-repo/my_file.txt", "some-repo"));
+    assertEquals("/file.txt", GhEditUtility.computeFilePath("xxx/myproject_repo/file.txt", "myproject"));
+    assertEquals("/file.txt", GhEditUtility.computeFilePath("/myproject_repo/file.txt", "myproject"));
+    assertEquals("/some/folder/file.txt", GhEditUtility.computeFilePath("xxx/myproject.git/some/folder/file.txt", "myproject"));
+  }
+
+  @Test
   public void testNullRepository() {
     GhEditLink link = GhEditUtility.compute(null, null, null, FILE);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_NO_REPOSITORY_SET, link);

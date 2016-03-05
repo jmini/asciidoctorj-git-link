@@ -40,8 +40,8 @@ public final class GhEditUtility {
       if (i > 0 && i < repository.length() - 1) {
         String repositoryName = repository.substring(i + 1);
 
-        int j = file.lastIndexOf(repositoryName);
-        if (j > 0) {
+        String filePath = computeFilePath(file, repositoryName);
+        if (filePath != null) {
           StringBuilder sb = new StringBuilder();
           sb.append("https://github.com/");
           sb.append(repository);
@@ -52,7 +52,7 @@ public final class GhEditUtility {
           else {
             sb.append(branch.toString());
           }
-          sb.append(file.substring(j + repositoryName.length()).replaceAll("\\\\", "/"));
+          sb.append(filePath);
           result.setUrl(sb.toString());
         }
       }
@@ -62,6 +62,18 @@ public final class GhEditUtility {
     }
 
     return result;
+  }
+
+  static String computeFilePath(String file, String repositoryName) {
+    int i = file.lastIndexOf(repositoryName);
+    if (i >= 0) {
+      String normalizedFile = file.replaceAll("\\\\", "/");
+      int j = normalizedFile.indexOf('/', i);
+      return normalizedFile.substring(j);
+    }
+    else {
+      return null;
+    }
   }
 
   private GhEditUtility() {
