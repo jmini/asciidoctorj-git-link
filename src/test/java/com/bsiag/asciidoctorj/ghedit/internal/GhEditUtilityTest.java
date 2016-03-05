@@ -29,9 +29,18 @@ public class GhEditUtilityTest {
     assertEquals("/my_file.txt", GhEditUtility.computeFilePath(FILE, "some-repo"));
     assertEquals("/folder/TEXT.adoc", GhEditUtility.computeFilePath(SUB_FILE, "some-repo"));
     assertEquals("/my_file.txt", GhEditUtility.computeFilePath("some-repo/my_file.txt", "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("xxx/some-repo/yyyy/some-repo/my_file.txt", "some-repo"));
     assertEquals("/file.txt", GhEditUtility.computeFilePath("xxx/myproject_repo/file.txt", "myproject"));
     assertEquals("/file.txt", GhEditUtility.computeFilePath("/myproject_repo/file.txt", "myproject"));
     assertEquals("/some/folder/file.txt", GhEditUtility.computeFilePath("xxx/myproject.git/some/folder/file.txt", "myproject"));
+
+    //Handle the special case "target/checkout"
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("xxx/some-repo/target/checkout/my_file.txt", "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("xxx/some-repo/proj/target/checkout/my_file.txt", "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("xxx/target/checkout/my_file.txt", "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("target/checkout/my_file.txt", "some-repo"));
+    assertEquals("/some/folder/file.txt", GhEditUtility.computeFilePath("xxx/some-repo/target/checkout/some/folder/file.txt", "some-repo"));
+    assertEquals("/my_file.txt", GhEditUtility.computeFilePath("xxx\\some-repo\\target\\checkout\\my_file.txt", "some-repo"));
   }
 
   @Test

@@ -11,6 +11,7 @@
 package com.bsiag.asciidoctorj.ghedit.internal;
 
 public final class GhEditUtility {
+  private static final String TARGET_CHECKOUT = "target/checkout";
   static final String DEFAULT_TEXT = "edit on GitHub";
   static final String DEFAULT_BRANCH = "master";
   static final String WARN_NO_REPOSITORY_SET = "gh-edit: There is no repository set.";
@@ -65,10 +66,15 @@ public final class GhEditUtility {
   }
 
   static String computeFilePath(String file, String repositoryName) {
-    int i = file.lastIndexOf(repositoryName);
-    if (i >= 0) {
-      String normalizedFile = file.replaceAll("\\\\", "/");
-      int j = normalizedFile.indexOf('/', i);
+    String normalizedFile = file.replaceAll("\\\\", "/");
+    int i1 = normalizedFile.lastIndexOf(repositoryName);
+    int i2 = normalizedFile.lastIndexOf(TARGET_CHECKOUT);
+    if (i1 > -1 && i1 > i2) {
+      int j = normalizedFile.indexOf('/', i1);
+      return normalizedFile.substring(j);
+    }
+    else if (i2 > -1 && i2 > i1) {
+      int j = i2 + TARGET_CHECKOUT.length();
       return normalizedFile.substring(j);
     }
     else {

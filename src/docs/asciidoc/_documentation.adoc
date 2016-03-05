@@ -21,6 +21,10 @@ For a file in this repository, this would for example a valid path:
 
     C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc
 
+There is one exception to this rule: if the file path (`docfile`) is located into 2 folders called `target/checkout`.
+In that case those folders are also considered as a possible git clone location.
+This might be useful during maven releases.
+
 The simplest usage is to have no additional parameters:
 
 .Simple usage (no arguments)
