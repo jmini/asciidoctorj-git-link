@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
 <meta name="author" content="Jeremie Bresson">
-<title>gh-edit[] Documentation</title>
+<title>gh&#58;edit&#91;&#93; Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -512,11 +512,11 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article">
 <div id="header">
-<h1>gh-edit[] Documentation</h1>
+<h1>gh&#58;edit&#91;&#93; Documentation</h1>
 <div class="details">
 <span id="author" class="author">Jeremie Bresson</span><br>
-<span id="revnumber">version 1.0.1,</span>
-<span id="revdate">2016-03-05</span>
+<span id="revnumber">version 2.0.0,</span>
+<span id="revdate">2016-04-14</span>
 </div>
 </div>
 <div id="content">
@@ -550,14 +550,73 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="usage"><a class="anchor" href="#usage"></a>Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to use the extension in your code, just write <code>gh-edit</code>.
-The first argument represents the coordinates of your repository on GitHub (pattern: <code>&lt;user&gt;/&lt;git-repository&gt;</code>).
-Depending on the case <code>&lt;user&gt;</code> might be a GitHub user name or a GitHub organization name.
-For this repository it would be <code>jmini/asciidoctorj-gh-edit</code>.</p>
+<p>If you want to use the extension in your code, just write <code>edit on GitHub</code>.
+<a href="#lst-all">Listing 1</a> provides a complete example, using <code>view</code> as <code>mode</code> and several arguments:</p>
+</div>
+<div id="lst-all" class="listingblock">
+<div class="title">Listing 1. Example using all possible arguments</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">See gh:view[repository='asciidoctor/asciidoctor.org', branch='master', path=&quot;news/debuter-avec-asciidoctor.adoc&quot;, link-text='this article in french'] on GitHub.</code></pre>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 1. Output (example with all arguments)</div>
+<div class="content">
+<div class="paragraph">
+<p>See <a href="https://github.com/asciidoctor/asciidoctor.org/blob/master/news/debuter-avec-asciidoctor.adoc">this article in french</a> on GitHub.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mode"><a class="anchor" href="#mode"></a>Mode</h3>
+<div class="paragraph">
+<p>The mode can be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit</code> (default used when the mode is unexpected)</p>
+</li>
+<li>
+<p><code>view</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h3>
+<div class="sect3">
+<h4 id="repository"><a class="anchor" href="#repository"></a>Repository</h4>
+<div class="paragraph">
+<p>The <code>repository</code> agurment specifies the repository on GitHub (pattern: <code>&lt;owner&gt;/&lt;repository-name&gt;</code>).
+Depending on the case <code>&lt;owner&gt;</code> might be a GitHub user name or a GitHub organization name.
+For the repository of this project it would be <code>jmini/asciidoctorj-gh-edit</code>.</p>
 </div>
 <div class="paragraph">
-<p>In order for the plugin to work, the file that is processed (value taken from the asciidoctor <code>docfile</code> attribute) needs to be located in one folder having the value defined by <code>&lt;git-repository&gt;</code> as name.
-For a file in this repository, this would for example a valid path:</p>
+<p>The value can be defined as an attribute in the document.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="branch"><a class="anchor" href="#branch"></a>Branch</h4>
+<div class="paragraph">
+<p>The <code>branch</code> argument corresponds to the git branch that should be used.
+If nothing is specified the default value <code>master</code> will be used.</p>
+</div>
+<div class="paragraph">
+<p>The value can be defined as an attribute in the document.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="path"><a class="anchor" href="#path"></a>Path</h4>
+<div class="paragraph">
+<p>The <code>path</code> argument specifies the path of the file inside the repository.</p>
+</div>
+<div class="paragraph">
+<p>If omitted, the path will be computed using the file location of the document beeing processed (value taken from the asciidoctor <code>docfile</code> attribute).
+In order for this to work, the file needs to be located in one folder having the defined <code>&lt;repository-name&gt;</code> value in its name.</p>
+</div>
+<div class="paragraph">
+<p>For example, for a file in this repository, this would a valid path:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -565,57 +624,83 @@ For a file in this repository, this would for example a valid path:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>There is one exception to this rule: if the file path (<code>docfile</code>) is located into 2 folders called <code>target/checkout</code>.
-In that case those folders are also considered as a possible git clone location.
-This might be useful during maven releases.</p>
+<p>An other possibility is:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>~/git/asciidoctorj-gh-edit_repo/src/docs/asciidoc/index.adoc</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This means that if you are using this pluing on a continous integration server like jenkins, you should have a workspace name (derived from the job name) matching the git repository name.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>The simplest usage is to have no additional parameters:</p>
+<p>In order to be able to compute the link correclty during the maven release process, a path containing two folders <code>target/checkout</code> is also considered as the root of the repository.</p>
 </div>
-<div class="listingblock">
-<div class="title">Simple usage (no arguments)</div>
+<div class="paragraph">
+<p>A valid path is:</p>
+</div>
+<div class="literalblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the gh-edit:jmini/asciidoctorj-gh-edit[] link.</code></pre>
+<pre>~/buildjob/target/checkout/src/docs/asciidoc/index.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If multiple possible roots are detected, the latest win.
+Example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>C:\git\asciidoctorj-gh-edit\target\checkout\src\docs\asciidoc\index.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case the computed path is <code>src\docs\asciidoc\index.adoc</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="link-text"><a class="anchor" href="#link-text"></a>Link text</h4>
+<div class="paragraph">
+<p>The <code>link-text</code> argument defines the text of the link. Default value is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"edit on GitHub" in the <code>edit</code> mode</p>
+</li>
+<li>
+<p>"view on GitHub" in the <code>view</code> mode</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="additional-examples"><a class="anchor" href="#additional-examples"></a>Additional examples</h3>
+<div class="paragraph">
+<p><a href="#lst-empty">Listing 2</a> demonstrate how you can use the macro without any arguments.
+Please notice that in this case <code>repository</code> (and optionally <code>branch</code>) should be defined at document level.</p>
+</div>
+<div id="lst-empty" class="listingblock">
+<div class="title">Listing 2. Simple usage (no arguments)</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="asciidoc">:repository: jmini/asciidoctorj-gh-edit
+:branch: patch-1
+
+Click on the gh:edit[] link.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 1. Output (simple usage)</div>
-<div class="content">
-<div class="paragraph">
-<p>Click on the <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/master/src/docs/asciidoc/index.adoc">edit on GitHub</a> link.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>The extension accept two optional arguments:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>branch</code> </dt>
-<dd>
-<p>name of the git branch. Default is <code>master</code></p>
-</dd>
-<dt class="hdlist1"><code>link-text</code> </dt>
-<dd>
-<p>text used as text. Default is "edit on GitHub"</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The rest of this section is illustrated with some examples.</p>
-</div>
-<div class="paragraph">
-<p>When no branch is defined, the link will point to the file in the <code>master</code> branch.
-But you can also specify an other branch as the first argument in the squared brackets.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example with specific branch as first argument (named attribute)</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the gh-edit:jmini/asciidoctorj-gh-edit[branch='patch-1'] link.</code></pre>
-</div>
-</div>
-<div class="exampleblock">
-<div class="title">Example 2. Output (example with specific branch)</div>
+<div class="title">Example 2. Output (simple usage)</div>
 <div class="content">
 <div class="paragraph">
 <p>Click on the <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/patch-1/src/docs/asciidoc/index.adoc">edit on GitHub</a> link.</p>
@@ -623,36 +708,39 @@ But you can also specify an other branch as the first argument in the squared br
 </div>
 </div>
 <div class="paragraph">
-<p>You can also change the link text:</p>
+<p>As with any Asciidoctor Macro you can used position attribute instead of named attribute.
+<a href="#lst-twoattr">Listing 3</a> provides an example with two arguments.</p>
 </div>
-<div class="listingblock">
-<div class="title">Example with custom link text (named attribute)</div>
+<div id="lst-twoattr" class="listingblock">
+<div class="title">Listing 3. Example with repository and branch as arguments (position attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh-edit:jmini/asciidoctorj-gh-edit[link-text=&quot;edit this page&quot;] on GitHub.</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the gh:view[jmini/asciidoctorj-gh-edit, patch-1] link.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. Output (example with custom link text)</div>
+<div class="title">Example 3. Output (example with repository and branch)</div>
 <div class="content">
 <div class="paragraph">
-<p>Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/master/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
+<p>Click on the <a href="https://github.com/jmini/asciidoctorj-gh-edit/blob/patch-1/src/docs/asciidoc/index.adoc">view on GitHub</a> link.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Of course you can combined both options:</p>
+<p><a href="#lst-linktxt">Listing 4</a> provides an example where the repository and the link text are specified as named attribute
+You can also change the link text:</p>
 </div>
-<div class="listingblock">
-<div class="title">Example with custom link text (position attributes)</div>
+<div id="lst-linktxt" class="listingblock">
+<div class="title">Listing 4. Example with repository and link text as arguments (named attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh-edit:jmini/asciidoctorj-gh-edit[patch-1, edit this page] on GitHub.</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Please gh:edit[repository=&quot;jmini/asciidoctorj-gh-edit&quot;, link-text=&quot;edit this page&quot;] on GitHub.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 4. Output (example with both)</div>
+<div class="title">Example 4. Output (example with repository and link text)</div>
 <div class="content">
 <div class="paragraph">
 <p>Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/patch-1/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
+</div>
 </div>
 </div>
 </div>
@@ -688,7 +776,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
           <span class="tag">&lt;dependency&gt;</span>
             <span class="tag">&lt;groupId&gt;</span>com.bsiag.asciidoctorj<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>gh-edit<span class="tag">&lt;/artifactId&gt;</span>
-            <span class="tag">&lt;version&gt;</span>1.0.1<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>2.0.0<span class="tag">&lt;/version&gt;</span>
           <span class="tag">&lt;/dependency&gt;</span>
           <span class="comment">&lt;!-- ... (other dependencies) --&gt;</span>
         <span class="tag">&lt;/dependencies&gt;</span>
@@ -697,6 +785,23 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
       <span class="comment">&lt;!-- ... (other plugins) --&gt;</span>
     <span class="tag">&lt;/plugins&gt;</span>
   <span class="tag">&lt;/build&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="asciidoctorj-version"><a class="anchor" href="#asciidoctorj-version"></a>Asciidoctorj version</h3>
+<div class="paragraph">
+<p>This extension is build and tested with this version of asciidoctorj:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>  &lt;properties&gt;
+    &lt;asciidoctorj.version&gt;1.5.4&lt;/asciidoctorj.version&gt;
+  &lt;/properties&gt;
+  &lt;!-- maven coordinates: --&gt;
+      &lt;groupId&gt;org.asciidoctor&lt;/groupId&gt;
+      &lt;artifactId&gt;asciidoctorj&lt;/artifactId&gt;
+      &lt;version&gt;${asciidoctorj.version}&lt;/version&gt;</pre>
 </div>
 </div>
 </div>
@@ -743,8 +848,8 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.1<br>
-Last updated 2016-03-05 05:05:16 CET
+Version 2.0.0<br>
+Last updated 2016-04-14 21:18:27 CEST
 </div>
 </div>
 </body>
