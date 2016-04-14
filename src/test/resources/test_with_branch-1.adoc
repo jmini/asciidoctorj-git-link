@@ -1,1 +1,1 @@
-Click on the gh-edit:jmini/asciidoctorj-gh-edit[branch='patch-1'] link.
+Click on the gh:view[jmini/asciidoctorj-gh-edit, patch-1] link.

@@ -1,1 +1,1 @@
-Please gh-edit:jmini/asciidoctorj-gh-edit[link-text="edit this page"] on GitHub.
+Please gh:edit[repository="jmini/asciidoctorj-gh-edit", link-text="edit this page"] on GitHub.

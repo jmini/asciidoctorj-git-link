@@ -2,8 +2,11 @@
 ifndef::rootdir[:rootdir: ../../../]
 ifndef::srcdir[:srcdir: ../../]
 :completedoc:
+:repository: jmini/asciidoctorj-gh-edit
+:branch: patch-1
 
-= gh-edit[] Documentation
+
+= gh&#58;edit&#91;&#93; Documentation
 Jeremie Bresson
 :revdate: {project-builddate}
 :revnumber: {project-version}

@@ -16,7 +16,8 @@ import org.junit.Test;
 
 public class GhEditUtilityTest {
 
-  private static final String DEFAULT_LINK_TEXT = GhEditUtility.DEFAULT_TEXT;
+  private static final String DEFAULT_LINK_TEXT = "edit on GitHub";
+  private static final String DEFAULT_VIEW_LINK_TEXT = "view on GitHub";
   private static final String CUSTOM_LINK_TEXT = "custom link Text";
 
   private static final String REPO = "jmini/some-repo";
@@ -45,61 +46,97 @@ public class GhEditUtilityTest {
 
   @Test
   public void testNullRepository() {
-    GhEditLink link = GhEditUtility.compute(null, null, null, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", null, null, null, null, FILE);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_NO_REPOSITORY_SET, link);
   }
 
   @Test
   public void testNullRepositoryWithText() {
-    GhEditLink link = GhEditUtility.compute(null, null, CUSTOM_LINK_TEXT, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", null, null, null, CUSTOM_LINK_TEXT, FILE);
     assertLinkEqual(null, CUSTOM_LINK_TEXT, GhEditUtility.WARN_NO_REPOSITORY_SET, link);
   }
 
   @Test
   public void testEmptyRepository() {
-    GhEditLink link = GhEditUtility.compute("", null, null, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", "", null, null, null, FILE);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_NO_REPOSITORY_SET, link);
   }
 
   @Test
-  public void testFileUnknownRepository() {
-    GhEditLink link = GhEditUtility.compute(REPO, null, null, null);
+  public void testFileUnknownFileAndPath() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, null, null, null);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_FILE_UNKNWON, link);
   }
 
   @Test
   public void testWrongRepository() {
-    GhEditLink link = GhEditUtility.compute("xxx", null, null, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", "xxx", null, null, null, FILE);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_UNEXPECTED_REPOSITORY + "xxx", link);
   }
 
   @Test
   public void testWrongRepository2() {
-    GhEditLink link = GhEditUtility.compute("zzz/", null, null, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", "zzz/", null, null, null, FILE);
     assertLinkEqual(null, DEFAULT_LINK_TEXT, GhEditUtility.WARN_UNEXPECTED_REPOSITORY + "zzz/", link);
   }
 
   @Test
-  public void testOkDefault() {
-    GhEditLink link = GhEditUtility.compute(REPO, null, null, FILE);
+  public void testOkDefaultEdit() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, null, null, FILE);
     assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_LINK_TEXT, null, link);
   }
 
   @Test
+  public void testOkDefaultView() {
+    GhEditLink link = GhEditUtility.compute("view", REPO, null, null, null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testNullMode() {
+    GhEditLink link = GhEditUtility.compute(null, REPO, null, null, null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_LINK_TEXT, GhEditUtility.WARN_UNEXPECTED_MODE, link);
+  }
+
+  @Test
+  public void testWrongMode() {
+    GhEditLink link = GhEditUtility.compute("xxx", REPO, null, null, null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_LINK_TEXT, GhEditUtility.WARN_UNEXPECTED_MODE, link);
+  }
+
+  @Test
+  public void testOkWithPath1() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, "path/to/this/File.adoc", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.adoc", DEFAULT_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkWithPath2() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, "/path/to/this/File.txt", null, SUB_FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkWithPathUnknownFile() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, "/path/to/this/File.txt", null, null);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_LINK_TEXT, null, link);
+  }
+
+  @Test
   public void testOkDefaultForSubFile() {
-    GhEditLink link = GhEditUtility.compute(REPO, null, null, SUB_FILE);
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, null, null, SUB_FILE);
     assertLinkEqual("https://github.com/jmini/some-repo/edit/master/folder/TEXT.adoc", DEFAULT_LINK_TEXT, null, link);
   }
 
   @Test
   public void testOkCustomBranch() {
-    GhEditLink link = GhEditUtility.compute(REPO, "features/preview", null, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", REPO, "features/preview", null, null, FILE);
     assertLinkEqual("https://github.com/jmini/some-repo/edit/features/preview/my_file.txt", DEFAULT_LINK_TEXT, null, link);
   }
 
   @Test
   public void testOkCustomText() {
-    GhEditLink link = GhEditUtility.compute(REPO, null, CUSTOM_LINK_TEXT, FILE);
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, null, CUSTOM_LINK_TEXT, FILE);
     assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", CUSTOM_LINK_TEXT, null, link);
   }
 

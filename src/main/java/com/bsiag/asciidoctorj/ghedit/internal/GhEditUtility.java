@@ -12,53 +12,100 @@ package com.bsiag.asciidoctorj.ghedit.internal;
 
 public final class GhEditUtility {
   private static final String TARGET_CHECKOUT = "target/checkout";
-  static final String DEFAULT_TEXT = "edit on GitHub";
+  static final String DEFAULT_EDIT_TEXT = "edit on GitHub";
+  static final String DEFAULT_VIEW_TEXT = "view on GitHub";
   static final String DEFAULT_BRANCH = "master";
+  static final String WARN_UNEXPECTED_MODE = "gh-edit: The mode is unexpected, using 'edit' as fallback.";
   static final String WARN_NO_REPOSITORY_SET = "gh-edit: There is no repository set.";
-  static final String WARN_FILE_UNKNWON = "gh-edit: Adoc file is not known";
+  static final String WARN_FILE_UNKNWON = "gh-edit: path and asciidoctor docfile are unknown";
   static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{repository}, current value: ";
 
-  public static GhEditLink compute(String repository, Object branch, Object linkText, String file) {
+  public static GhEditLink compute(String modeText, Object repository, Object branch, Object path, Object linkText, Object file) {
     GhEditLink result = new GhEditLink();
+
+    //Mode:
+    GhMode mode;
+    if (modeText != null) {
+      try {
+        mode = GhMode.valueOf(modeText.toUpperCase());
+      }
+      catch (IllegalArgumentException e) {
+        result.setWarning(WARN_UNEXPECTED_MODE);
+        mode = GhMode.EDIT;
+      }
+    }
+    else {
+      result.setWarning(WARN_UNEXPECTED_MODE);
+      mode = GhMode.EDIT;
+    }
 
     //text:
     if (linkText == null || linkText.toString().isEmpty()) {
-      result.setText(DEFAULT_TEXT);
+      switch (mode) {
+        case EDIT:
+          result.setText(DEFAULT_EDIT_TEXT);
+          break;
+        case VIEW:
+          result.setText(DEFAULT_VIEW_TEXT);
+          break;
+        default:
+          throw new IllegalStateException("unexpected mode");
+      }
     }
     else {
       result.setText(linkText.toString());
     }
 
     //Repository:
-    if (repository == null || repository.isEmpty()) {
+    if (repository == null || repository.toString().isEmpty()) {
       result.setWarning(WARN_NO_REPOSITORY_SET);
     }
-    else if (file == null) {
+    else if ((path == null || path.toString().isEmpty()) && (file == null || file.toString().isEmpty())) {
       result.setWarning(WARN_FILE_UNKNWON);
     }
     else {
-      int i = repository.lastIndexOf('/');
-      if (i > 0 && i < repository.length() - 1) {
-        String repositoryName = repository.substring(i + 1);
+      String repoString = (String) repository;
+      int i = repoString.lastIndexOf('/');
+      String filePath = null;
 
-        String filePath = computeFilePath(file, repositoryName);
-        if (filePath != null) {
-          StringBuilder sb = new StringBuilder();
-          sb.append("https://github.com/");
-          sb.append(repository);
-          sb.append("/edit/");
-          if (branch == null || branch.toString().isEmpty()) {
-            sb.append(DEFAULT_BRANCH);
-          }
-          else {
-            sb.append(branch.toString());
-          }
-          sb.append(filePath);
-          result.setUrl(sb.toString());
-        }
+      if (path != null && !path.toString().isEmpty()) {
+        filePath = path.toString();
+      }
+      else if (i > 0 && i < repoString.length() - 1) {
+        String repositoryName = repoString.substring(i + 1);
+        filePath = computeFilePath(file.toString(), repositoryName);
       }
       else {
-        result.setWarning(WARN_UNEXPECTED_REPOSITORY + repository);
+        result.setWarning(WARN_UNEXPECTED_REPOSITORY + repoString);
+      }
+
+      if (filePath != null) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://github.com/");
+        sb.append(repoString);
+        sb.append("/");
+        switch (mode) {
+          case EDIT:
+            sb.append("edit");
+            break;
+          case VIEW:
+            sb.append("blob");
+            break;
+          default:
+            throw new IllegalStateException("unexpected mode");
+        }
+        sb.append("/");
+        if (branch == null || branch.toString().isEmpty()) {
+          sb.append(DEFAULT_BRANCH);
+        }
+        else {
+          sb.append(branch.toString());
+        }
+        if (!filePath.startsWith("/")) {
+          sb.append("/");
+        }
+        sb.append(filePath);
+        result.setUrl(sb.toString());
       }
     }
 

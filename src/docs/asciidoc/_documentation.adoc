@@ -1,6 +1,7 @@
 
 ifndef::srcdir[:srcdir: ../../]
 :rootdir: ../../../
+:listing-caption: Listing
 
 Links:
 
@@ -11,79 +12,130 @@ Links:
 
 == Usage
 
-If you want to use the extension in your code, just write `gh-edit`.
-The first argument represents the coordinates of your repository on GitHub (pattern: `<user>/<git-repository>`).
-Depending on the case `<user>` might be a GitHub user name or a GitHub organization name.
-For this repository it would be `jmini/asciidoctorj-gh-edit`.
+If you want to use the extension in your code, just write `gh:<mode>[<arguments>]`.
+<<lst-all>> provides a complete example, using `view` as `mode` and several arguments:
 
-In order for the plugin to work, the file that is processed (value taken from the asciidoctor `docfile` attribute) needs to be located in one folder having the value defined by `<git-repository>` as name.
-For a file in this repository, this would for example a valid path:
+[[lst-all, Listing 1]]
+.Example using all possible arguments
+[source,asciidoc]
+----
+include::{srcdir}test/resources/test_with_all-2.adoc[]
+----
+
+.Output (example with all arguments)
+====
+include::{srcdir}test/resources/test_with_all-2.adoc[]
+====
+
+=== Mode
+
+The mode can be:
+
+* `edit` (default used when the mode is unexpected)
+* `view`
+
+=== Arguments
+
+==== Repository
+
+The `repository` agurment specifies the repository on GitHub (pattern: `<owner>/<repository-name>`).
+Depending on the case `<owner>` might be a GitHub user name or a GitHub organization name.
+For the repository of this project it would be `jmini/asciidoctorj-gh-edit`.
+
+The value can be defined as an attribute in the document.
+
+==== Branch
+
+The `branch` argument corresponds to the git branch that should be used.
+If nothing is specified the default value `master` will be used.
+
+The value can be defined as an attribute in the document.
+
+==== Path
+
+The `path` argument specifies the path of the file inside the repository.
+
+If omitted, the path will be computed using the file location of the document beeing processed (value taken from the asciidoctor `docfile` attribute).
+In order for this to work, the file needs to be located in one folder having the defined `<repository-name>` value in its name.
+
+For example, for a file in this repository, this would a valid path:
 
     C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc
 
-There is one exception to this rule: if the file path (`docfile`) is located into 2 folders called `target/checkout`.
-In that case those folders are also considered as a possible git clone location.
-This might be useful during maven releases.
+An other possibility is:
 
-The simplest usage is to have no additional parameters:
+    ~/git/asciidoctorj-gh-edit_repo/src/docs/asciidoc/index.adoc
 
+
+TIP: This means that if you are using this pluing on a continous integration server like jenkins, you should have a workspace name (derived from the job name) matching the git repository name.
+
+In order to be able to compute the link correclty during the maven release process, a path containing two folders `target/checkout` is also considered as the root of the repository.
+
+A valid path is:
+
+    ~/buildjob/target/checkout/src/docs/asciidoc/index.adoc
+
+If multiple possible roots are detected, the latest win.
+Example:
+
+    C:\git\asciidoctorj-gh-edit\target\checkout\src\docs\asciidoc\index.adoc
+
+In this case the computed path is `src\docs\asciidoc\index.adoc`.
+
+==== Link text
+
+The `link-text` argument defines the text of the link. Default value is:
+
+* "edit on GitHub" in the `edit` mode
+* "view on GitHub" in the `view` mode
+
+=== Additional examples
+
+<<lst-empty>> demonstrate how you can use the macro without any arguments.
+Please notice that in this case `repository` (and optionally `branch`) should be defined at document level. 
+
+[[lst-empty, Listing 2]]
 .Simple usage (no arguments)
 [source,asciidoc]
 ----
-include::{srcdir}test/resources/test_simple.adoc[]
+include::{srcdir}test/resources/test_empty.adoc[]
 ----
 
 .Output (simple usage)
 ====
-include::{srcdir}test/resources/test_simple.adoc[]
+include::{srcdir}test/resources/test_empty.adoc[]
 ====
 
-The extension accept two optional arguments:
+As with any Asciidoctor Macro you can used position attribute instead of named attribute.
+<<lst-twoattr>> provides an example with two arguments.
 
-`branch` :: name of the git branch. Default is `master`
-`link-text` :: text used as text. Default is "edit on GitHub"
-
-The rest of this section is illustrated with some examples.
-
-When no branch is defined, the link will point to the file in the `master` branch.
-But you can also specify an other branch as the first argument in the squared brackets.
-
-.Example with specific branch as first argument (named attribute)
+[[lst-twoattr, Listing 3]]
+.Example with repository and branch as arguments (position attribute)
 [source,asciidoc]
 ----
 include::{srcdir}test/resources/test_with_branch-1.adoc[]
 ----
 
-.Output (example with specific branch)
+.Output (example with repository and branch)
 ====
 include::{srcdir}test/resources/test_with_branch-1.adoc[]
 ====
 
+<<lst-linktxt>> provides an example where the repository and the link text are specified as named attribute
 You can also change the link text:
 
-.Example with custom link text (named attribute)
+[[lst-linktxt, Listing 4]]
+.Example with repository and link text as arguments (named attribute)
 [source,asciidoc]
 ----
 include::{srcdir}test/resources/test_with_link_text.adoc[]
 ----
 
-.Output (example with custom link text)
+.Output (example with repository and link text)
 ====
 include::{srcdir}test/resources/test_with_link_text.adoc[]
 ====
 
-Of course you can combined both options:
-
-.Example with custom link text (position attributes)
-[source,asciidoc]
-----
-include::{srcdir}test/resources/test_with_all-1.adoc[]
-----
-
-.Output (example with both)
-====
-include::{srcdir}test/resources/test_with_all-1.adoc[]
-====
 
 === Add the extension to your pom.xml file
 
@@ -103,3 +155,10 @@ Your `<build>` section could looks like this:
 include::{rootdir}pom.xml[tags=mvn-plugin]
 ----
 
+=== Asciidoctorj version
+
+This extension is build and tested with this version of asciidoctorj:
+
+----
+include::{rootdir}pom.xml[tags=mvn-adocj]
+----

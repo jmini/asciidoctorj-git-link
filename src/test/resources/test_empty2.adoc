@@ -1,0 +1,3 @@
+:repository: jmini/asciidoctorj-gh-edit
+
+Click on the gh:view[] link.

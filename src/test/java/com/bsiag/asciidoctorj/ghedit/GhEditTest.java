@@ -31,6 +31,16 @@ public class GhEditTest {
   }
 
   @Test
+  public void testEmpty() throws Exception {
+    runTest("test_empty");
+  }
+
+  @Test
+  public void testEmpty2() throws Exception {
+    runTest("test_empty2");
+  }
+
+  @Test
   public void testWithBranch1() throws Exception {
     runTest("test_with_branch-1");
   }

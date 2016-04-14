@@ -1,0 +1,4 @@
+:repository: jmini/asciidoctorj-gh-edit
+:branch: patch-1
+
+Click on the gh:edit[] link.

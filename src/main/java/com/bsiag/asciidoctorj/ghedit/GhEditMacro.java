@@ -28,12 +28,19 @@ public class GhEditMacro extends InlineMacroProcessor {
   }
 
   @Override
-  protected Object process(AbstractBlock parent, String repository, Map<String, Object> attributes) {
-    String docFile = searchDocFile(parent);
-
-    Object branch = searchAttribute(attributes, "branch", 1);
-    Object linkText = searchAttribute(attributes, "link-text", 2);
-    GhEditLink link = GhEditUtility.compute(repository, branch, linkText, docFile);
+  protected Object process(AbstractBlock parent, String mode, Map<String, Object> attributes) {
+    Object docFile = searchDocFile(parent);
+    Object repository = searchAttribute(attributes, "repository", 1);
+    if (repository == null) {
+      repository = parent.getDocument().getAttr("repository");
+    }
+    Object branch = searchAttribute(attributes, "branch", 2);
+    if (branch == null) {
+      branch = parent.getDocument().getAttr("branch");
+    }
+    Object path = searchAttribute(attributes, "path", 3);
+    Object linkText = searchAttribute(attributes, "link-text", 4);
+    GhEditLink link = GhEditUtility.compute(mode, repository, branch, path, linkText, docFile);
 
     if (link.getWarning() != null) {
       //TODO: log a warning containing link.getWarning()

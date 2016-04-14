@@ -1,1 +1,1 @@
-Please gh-edit:jmini/asciidoctorj-gh-edit[branch='gh-pages', link-text='edit a page'] on GitHub.
+See gh:view[repository='asciidoctor/asciidoctor.org', branch='master', path="news/debuter-avec-asciidoctor.adoc", link-text='this article in french'] on GitHub.
