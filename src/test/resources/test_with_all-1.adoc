@@ -1,1 +1,1 @@
-Please gh:edit[jmini/asciidoctorj-gh-edit, patch-1, README.adoc, edit the read-me page] on GitHub.
+Please gh:edit[jmini/asciidoctorj-gh-edit, patch-1, README.adoc, edit the read-me page, https://www.github.com/] on GitHub.

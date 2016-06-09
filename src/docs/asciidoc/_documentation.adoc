@@ -10,6 +10,8 @@ Links:
 * link:https://bintray.com/jmini/maven/asciidoctorj-gh-edit[Binaries on Bintray]
 * link:https://github.com/jmini/asciidoctorj-gh-edit/issues[Issue tracker]
 
+TIP: Do you want to improve this page? Please gh:edit[link-text="edit it on GitHub", repository="jmini/asciidoctorj-gh-edit"].
+
 == Usage
 
 If you want to use the extension in your code, just write `gh:<mode>[<arguments>]`.
@@ -89,9 +91,24 @@ The `link-text` argument defines the text of the link. Default value is:
 * "edit on GitHub" in the `edit` mode
 * "view on GitHub" in the `view` mode
 
+==== Server
+
+The `server` argument is useful if you use your own Git Repository manager (the URL syntax needs to be compatible with GitHub. This is the case with GitLab).
+Possible values are:
+
+* `http://git.company.com/`
+* `https://my.company.com/git-manager/`
+* `https://my.company.com/git-manager` 
+
+The trailing slash is not mandatory.
+
+The value can be defined as an attribute in the document.
+
+If nothing is specified the default value `https://github.com/` is used.
+
 === Additional examples
 
-<<lst-empty>> demonstrate how you can use the macro without any arguments.
+<<lst-empty>> demonstrates how you can use the macro without any arguments.
 Please notice that in this case `repository` (and optionally `branch`) should be defined at document level. 
 
 [[lst-empty, Listing 2]]

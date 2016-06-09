@@ -20,7 +20,7 @@ public final class GhEditUtility {
   static final String WARN_FILE_UNKNWON = "gh-edit: path and asciidoctor docfile are unknown";
   static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{repository}, current value: ";
 
-  public static GhEditLink compute(String modeText, Object repository, Object branch, Object path, Object linkText, Object file) {
+  public static GhEditLink compute(String modeText, Object server, Object repository, Object branch, Object path, Object linkText, Object file) {
     GhEditLink result = new GhEditLink();
 
     //Mode:
@@ -89,7 +89,16 @@ public final class GhEditUtility {
 
       if (filePath != null) {
         StringBuilder sb = new StringBuilder();
-        sb.append("https://github.com/");
+        if (server != null && !server.toString().isEmpty()) {
+          String serverString = server.toString();
+          sb.append(serverString);
+          if (!serverString.endsWith("/")) {
+            sb.append("/");
+          }
+        }
+        else {
+          sb.append("https://github.com/");
+        }
         sb.append(repoString);
         sb.append("/");
         switch (mode) {

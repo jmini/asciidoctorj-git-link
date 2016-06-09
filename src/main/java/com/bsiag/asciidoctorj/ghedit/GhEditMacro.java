@@ -40,7 +40,11 @@ public class GhEditMacro extends InlineMacroProcessor {
     }
     Object path = searchAttribute(attributes, "path", 3);
     Object linkText = searchAttribute(attributes, "link-text", 4);
-    GhEditLink link = GhEditUtility.compute(mode, repository, branch, path, linkText, docFile);
+    Object server = searchAttribute(attributes, "server", 5);
+    if (server == null) {
+      server = parent.getDocument().getAttr("server");
+    }
+    GhEditLink link = GhEditUtility.compute(mode, server, repository, branch, path, linkText, docFile);
 
     if (link.getWarning() != null) {
       //TODO: log a warning containing link.getWarning()
