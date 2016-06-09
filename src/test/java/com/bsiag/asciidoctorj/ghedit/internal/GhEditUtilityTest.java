@@ -140,6 +140,48 @@ public class GhEditUtilityTest {
     assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", CUSTOM_LINK_TEXT, null, link);
   }
 
+  @Test
+  public void testOkViewDir() {
+    GhEditLink link = GhEditUtility.compute("viewdir", REPO, null, "some/folder", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkViewDirTrailingSlash() {
+    GhEditLink link = GhEditUtility.compute("viewdir", REPO, null, "some/folder/", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkViewDirStartWithDot() {
+    GhEditLink link = GhEditUtility.compute("viewdir", REPO, null, "./some/folder", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkViewDirDotSlash() {
+    GhEditLink link = GhEditUtility.compute("viewdir", REPO, null, "./", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testOkViewDirDotSlashOtherBranch() {
+    GhEditLink link = GhEditUtility.compute("viewdir", REPO, "gh-pages", "./", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/gh-pages", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testEditButShouldBeViewDir() {
+    GhEditLink link = GhEditUtility.compute("edit", REPO, null, "some/folder/", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
+  @Test
+  public void testViewButShouldBeViewDir() {
+    GhEditLink link = GhEditUtility.compute("view", REPO, null, "some/folder/", null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+  }
+
   private static void assertLinkEqual(String url, String text, String warning, GhEditLink actual) {
     assertEquals("url", url, actual.getUrl());
     assertEquals("text", text, actual.getText());

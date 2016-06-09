@@ -24,19 +24,26 @@ public final class GhEditUtility {
     GhEditLink result = new GhEditLink();
 
     //Mode:
-    GhMode mode;
-    if (modeText != null) {
-      try {
-        mode = GhMode.valueOf(modeText.toUpperCase());
+    GhMode mode = null;
+    if (path != null && !path.toString().isEmpty()) {
+      if (path.toString().endsWith("/")) {
+        mode = GhMode.VIEWDIR;
       }
-      catch (IllegalArgumentException e) {
+    }
+    if (mode == null) {
+      if (modeText != null) {
+        try {
+          mode = GhMode.valueOf(modeText.toUpperCase());
+        }
+        catch (IllegalArgumentException e) {
+          result.setWarning(WARN_UNEXPECTED_MODE);
+          mode = GhMode.EDIT;
+        }
+      }
+      else {
         result.setWarning(WARN_UNEXPECTED_MODE);
         mode = GhMode.EDIT;
       }
-    }
-    else {
-      result.setWarning(WARN_UNEXPECTED_MODE);
-      mode = GhMode.EDIT;
     }
 
     //text:
@@ -46,6 +53,7 @@ public final class GhEditUtility {
           result.setText(DEFAULT_EDIT_TEXT);
           break;
         case VIEW:
+        case VIEWDIR:
           result.setText(DEFAULT_VIEW_TEXT);
           break;
         default:
@@ -91,6 +99,9 @@ public final class GhEditUtility {
           case VIEW:
             sb.append("blob");
             break;
+          case VIEWDIR:
+            sb.append("tree");
+            break;
           default:
             throw new IllegalStateException("unexpected mode");
         }
@@ -101,10 +112,25 @@ public final class GhEditUtility {
         else {
           sb.append(branch.toString());
         }
-        if (!filePath.startsWith("/")) {
-          sb.append("/");
+        int beginIndex;
+        if (filePath.startsWith("./")) {
+          beginIndex = 1;
         }
-        sb.append(filePath);
+        else if (!filePath.startsWith("/")) {
+          sb.append("/");
+          beginIndex = 0;
+        }
+        else {
+          beginIndex = 0;
+        }
+        int endIndex;
+        if (filePath.endsWith("/")) {
+          endIndex = filePath.length() - 1;
+        }
+        else {
+          endIndex = filePath.length();
+        }
+        sb.append(filePath.substring(beginIndex, endIndex));
         result.setUrl(sb.toString());
       }
     }

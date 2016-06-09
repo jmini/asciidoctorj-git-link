@@ -11,5 +11,5 @@
 package com.bsiag.asciidoctorj.ghedit.internal;
 
 public enum GhMode {
-  EDIT, VIEW
+  EDIT, VIEW, VIEWDIR
 }
