@@ -91,6 +91,13 @@ The `link-text` argument defines the text of the link. Default value is:
 * "edit on GitHub" in the `edit` mode
 * "view on GitHub" in the `view` mode
 
+==== Link window
+
+The `link-window` argument defines where the the link will be openend.
+This is similar to the `window` attribute of the `link` macro.
+
+The default value is empty (not set).
+
 ==== Server
 
 The `server` argument is useful if you use your own Git Repository manager (the URL syntax needs to be compatible with GitHub. This is the case with GitLab).

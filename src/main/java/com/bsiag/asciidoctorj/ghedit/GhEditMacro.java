@@ -40,7 +40,8 @@ public class GhEditMacro extends InlineMacroProcessor {
     }
     Object path = searchAttribute(attributes, "path", 3);
     Object linkText = searchAttribute(attributes, "link-text", 4);
-    Object server = searchAttribute(attributes, "server", 5);
+    Object linkWindow = searchAttribute(attributes, "link-window", 5);
+    Object server = searchAttribute(attributes, "server", 6);
     if (server == null) {
       server = parent.getDocument().getAttr("server");
     }
@@ -58,6 +59,11 @@ public class GhEditMacro extends InlineMacroProcessor {
       Map<String, Object> options = new HashMap<String, Object>();
       options.put("type", ":link");
       options.put("target", link.getUrl());
+
+      // Define attribute for an 'anchor' element:
+      if (linkWindow != null && !linkWindow.toString().isEmpty()) {
+        attributes.put("window", linkWindow.toString());
+      }
 
       // Create the 'anchor' node:
       Inline inline = createInline(parent, "anchor", link.getText(), attributes, options);
