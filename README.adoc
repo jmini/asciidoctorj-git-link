@@ -1,37 +1,47 @@
-
-:rootdir: ./
-:docpage: http://jmini.github.io/asciidoctorj-gh-edit
-:issues: https://github.com/jmini/asciidoctorj-gh-edit/issues
-:setup: https://raw.githubusercontent.com/jmini/asciidoctorj-gh-edit/master/AsciidoctorjGhEdit.setup
-:src: https://github.com/jmini/asciidoctorj-gh-edit/tree/master/src
+//tag::vardef[]
+:gh-repo-owner: jmini
+:gh-repo-name: asciidoctorj-gh-edit
+:project-name: gh&#58;edit&#91;&#93;
+:branch: master
+:twitter-handle: j2r2b
 :license: http://www.eclipse.org/legal/epl-v10.html
+:license-name: Eclipse Public License - v 1.0
+:oomph-file: AsciidoctorjGhEdit.setup
+:src-folder-name: src
 
-Asciidoctorj extension to create a link "Edit on GitHub".
+:repository: {gh-repo-owner}/{gh-repo-name}
+:homepage: https://{gh-repo-owner}.github.io/{gh-repo-name}
+:issues: https://github.com/{repository}/issues
+:setup: https://raw.githubusercontent.com/{repository}/{branch}/{oomph-file}
+:src-folder-url: https://github.com/{repository}/tree/{branch}/{src-folder-name}
+//end::vardef[]
 
-ifndef::completedoc[]
-See the link:{docpage}[documentation]. 
-endif::completedoc[]
+//tag::header[]
+= gh&#58;edit&#91;&#93;
+Jeremie Bresson
 
-ifdef::completedoc[]
-include::{rootdir}src/docs/asciidoc/_documentation.adoc[]
-endif::completedoc[]
+Asciidoctorj extension to create a links "Edit on GitHub".
+//end::header[]
 
-== Code
+== Project Homepage
 
-As for any maven plugin, the source code of the plugin is available in the link:{src}[src/] folder.
+Visit the link:{homepage}[project home page] to know more about:
 
-If you are using the Eclipse Installer (Oomph) you can use the `AsciidoctorjGhEdit.setup` File (link:{setup}[url]) to setup your IDE properly.
+* usage of the extension
+* how to checkout and build the source code
+* ...
 
-=== Build
 
-Run maven install on the root pom file:
-
-  mvn install
-
+//tag::contact-section[]
 == Get in touch
 
-Use the link:{issues}[asciidoctorj-gh-edit issue tracker] on GitHub.
+Use the link:{issues}[{project-name} issue tracker] on GitHub.
 
+You can also contact me on Twitter: link:https://twitter.com/{twitter-handle}[@{twitter-handle}]
+//end::contact-section[]
+
+//tag::license-section[]
 == License
 
-link:{license}[Eclipse Public License - v 1.0]
+link:{license}[{license-name}]
+//end::license-section[]
