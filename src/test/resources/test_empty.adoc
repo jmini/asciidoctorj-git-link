@@ -1,4 +1,4 @@
-:repository: jmini/asciidoctorj-gh-edit
-:branch: patch-1
+:git-repository: jmini/asciidoctorj-gh-edit
+:git-branch: patch-1
 
-Click on the gh:edit[] link.
+Click on the git-link:self[] link.

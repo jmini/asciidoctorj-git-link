@@ -27,8 +27,8 @@ public class GhEditMacroExtension implements ExtensionRegistry {
 
     Map<String, Object> options = new HashMap<String, Object>();
     options.put("content_model", ":attributes");
-    options.put("pos_attrs", new ArrayList<String>(Arrays.asList(":repository", ":branch", ":path", ":link-text")));
-    GhEditMacro macro = new GhEditMacro("gh", options);
+    options.put("pos_attrs", new ArrayList<String>(Arrays.asList(":link-text", ":mode", ":branch", ":repository", ":link-window", ":server")));
+    GhEditMacro macro = new GhEditMacro("git-link", options);
 
     javaExtensionRegistry.inlineMacro(macro);
   }

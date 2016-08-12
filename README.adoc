@@ -1,7 +1,7 @@
 //tag::vardef[]
 :gh-repo-owner: jmini
 :gh-repo-name: asciidoctorj-gh-edit
-:project-name: gh&#58;edit&#91;&#93;
+:project-name: git-link&#58;&#91;&#93;
 :branch: master
 :twitter-handle: j2r2b
 :license: http://www.eclipse.org/legal/epl-v10.html
@@ -9,7 +9,7 @@
 :oomph-file: AsciidoctorjGhEdit.setup
 :src-folder-name: src
 
-:repository: {gh-repo-owner}/{gh-repo-name}
+:git-repository: {gh-repo-owner}/{gh-repo-name}
 :homepage: https://{gh-repo-owner}.github.io/{gh-repo-name}
 :issues: https://github.com/{repository}/issues
 :setup: https://raw.githubusercontent.com/{repository}/{branch}/{oomph-file}
@@ -17,10 +17,10 @@
 //end::vardef[]
 
 //tag::header[]
-= gh&#58;edit&#91;&#93;
+= git-link&#58;&#91;&#93;
 Jeremie Bresson
 
-Asciidoctorj extension to create a links "Edit on GitHub".
+Asciidoctorj extension to create links to view or edit files on a git server (like github.com).
 //end::header[]
 
 == Project Homepage

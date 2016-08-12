@@ -28,24 +28,17 @@ public class GhEditMacro extends InlineMacroProcessor {
   }
 
   @Override
-  protected Object process(AbstractBlock parent, String mode, Map<String, Object> attributes) {
+  protected Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
     Object docFile = searchDocFile(parent);
-    Object repository = searchAttribute(attributes, "repository", 1);
-    if (repository == null) {
-      repository = parent.getDocument().getAttr("repository");
-    }
-    Object branch = searchAttribute(attributes, "branch", 2);
-    if (branch == null) {
-      branch = parent.getDocument().getAttr("branch");
-    }
-    Object path = searchAttribute(attributes, "path", 3);
-    Object linkText = searchAttribute(attributes, "link-text", 4);
-    Object linkWindow = searchAttribute(attributes, "link-window", 5);
-    Object server = searchAttribute(attributes, "server", 6);
-    if (server == null) {
-      server = parent.getDocument().getAttr("server");
-    }
-    GhEditLink link = GhEditUtility.compute(mode, server, repository, branch, path, linkText, docFile);
+
+    Object linkText = searchAttribute(attributes, "link-text", 1, parent, null);
+    Object mode = searchAttribute(attributes, "mode", 2, parent, "git-link-mode");
+    Object branch = searchAttribute(attributes, "branch", 3, parent, "git-branch");
+    Object repository = searchAttribute(attributes, "repository", 4, parent, "git-repository");
+    Object linkWindow = searchAttribute(attributes, "link-window", 5, parent, null);
+    Object server = searchAttribute(attributes, "server", 6, parent, "git-server");
+
+    GhEditLink link = GhEditUtility.compute(path, mode, server, repository, branch, linkText, docFile);
 
     if (link.getWarning() != null) {
       //TODO: log a warning containing link.getWarning()
@@ -73,7 +66,7 @@ public class GhEditMacro extends InlineMacroProcessor {
     }
   }
 
-  private Object searchAttribute(Map<String, Object> attributes, String attrKey, int attrPosition) {
+  private Object searchAttribute(Map<String, Object> attributes, String attrKey, int attrPosition, AbstractBlock parent, String attrDocumentKey) {
     Object result;
     //Try to get the attribute by key:
     result = attributes.get(attrKey);
@@ -84,6 +77,10 @@ public class GhEditMacro extends InlineMacroProcessor {
     result = attributes.get(attrPosition);
     if (result != null) {
       return result;
+    }
+    //Try to get the attribute in the document:
+    if (attrDocumentKey != null) {
+      return parent.getDocument().getAttr(attrDocumentKey);
     }
     //Not found:
     return null;

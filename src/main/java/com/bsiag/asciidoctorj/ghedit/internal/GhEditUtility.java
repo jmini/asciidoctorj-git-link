@@ -20,29 +20,29 @@ public final class GhEditUtility {
   static final String WARN_FILE_UNKNWON = "gh-edit: path and asciidoctor docfile are unknown";
   static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{repository}, current value: ";
 
-  public static GhEditLink compute(String modeText, Object server, Object repository, Object branch, Object path, Object linkText, Object file) {
+  public static GhEditLink compute(String target, Object modeInput, Object server, Object repository, Object branch, Object linkText, Object file) {
     GhEditLink result = new GhEditLink();
 
     //Mode:
     GhMode mode = null;
-    if (path != null && !path.toString().isEmpty()) {
-      if (path.toString().endsWith("/")) {
+    if (target != null && !"self".equals(target)) {
+      if (target.endsWith("/")) {
         mode = GhMode.VIEWDIR;
       }
     }
     if (mode == null) {
-      if (modeText != null) {
+      if (modeInput != null && !modeInput.toString().isEmpty()) {
         try {
-          mode = GhMode.valueOf(modeText.toUpperCase());
+          mode = GhMode.valueOf(modeInput.toString().toUpperCase());
         }
         catch (IllegalArgumentException e) {
           result.setWarning(WARN_UNEXPECTED_MODE);
-          mode = GhMode.EDIT;
+          mode = GhMode.VIEW;
         }
       }
       else {
         result.setWarning(WARN_UNEXPECTED_MODE);
-        mode = GhMode.EDIT;
+        mode = GhMode.VIEW;
       }
     }
 
@@ -68,7 +68,7 @@ public final class GhEditUtility {
     if (repository == null || repository.toString().isEmpty()) {
       result.setWarning(WARN_NO_REPOSITORY_SET);
     }
-    else if ((path == null || path.toString().isEmpty()) && (file == null || file.toString().isEmpty())) {
+    else if ((target == null || "self".equals(target)) && (file == null || file.toString().isEmpty())) {
       result.setWarning(WARN_FILE_UNKNWON);
     }
     else {
@@ -76,8 +76,8 @@ public final class GhEditUtility {
       int i = repoString.lastIndexOf('/');
       String filePath = null;
 
-      if (path != null && !path.toString().isEmpty()) {
-        filePath = path.toString();
+      if (target != null && !"self".equals(target)) {
+        filePath = target;
       }
       else if (i > 0 && i < repoString.length() - 1) {
         String repositoryName = repoString.substring(i + 1);

@@ -1,1 +1,1 @@
-Click on the gh:view[jmini/asciidoctorj-gh-edit, patch-1] link.
+Click on the git-link:self[link, view, patch-1, jmini/asciidoctorj-gh-edit]!
