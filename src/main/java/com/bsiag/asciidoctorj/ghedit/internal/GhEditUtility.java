@@ -18,7 +18,7 @@ public final class GhEditUtility {
   static final String WARN_UNEXPECTED_MODE = "gh-edit: The mode is unexpected, using 'edit' as fallback.";
   static final String WARN_NO_REPOSITORY_SET = "gh-edit: There is no repository set.";
   static final String WARN_FILE_UNKNWON = "gh-edit: path and asciidoctor docfile are unknown";
-  static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{repository}, current value: ";
+  static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{git-repository}, current value: ";
 
   public static GhEditLink compute(String target, Object modeInput, Object server, Object repository, Object branch, Object linkText, Object file) {
     GhEditLink result = new GhEditLink();

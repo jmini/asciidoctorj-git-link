@@ -1,12 +1,13 @@
-:github-readme: ../../../README.adoc
-:srcdir: ../../../src/
+:rootdir: ../../..
+:github-readme: {rootdir}/README.adoc
+:srcdir: {rootdir}/src/
 :listing-caption: Listing
 :revdate: {project-builddate}
 :revnumber: {project-version}
 
 include::{github-readme}[tags=vardef]
 
-:bintraypage: https://bintray.com/jmini/maven/asciidoctorj-gh-edit
+:bintraypage: https://bintray.com/jmini/maven/asciidoctorj-git-link
 :projectpage: https://github.com/{gh-repo-owner}/{gh-repo-name}
 
 include::{github-readme}[tags=header]
@@ -49,7 +50,7 @@ In order to work, the file needs to be on a specific location.
 The first possibility is to have a document located in a folder containing the `<repository-name>` value in its name.
 For example, for a file in this repository, this would a valid path:
 
-    C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc
+    C:\git\asciidoctorj-git-link\src\docs\asciidoc\index.adoc
 
 The derived path for the link would be
 
@@ -57,7 +58,7 @@ The derived path for the link would be
 
 An other possibility is:
 
-    ~/git/asciidoctorj-gh-edit_repository/src/docs/asciidoc/index.adoc
+    ~/git/asciidoctorj-git-link_repository/src/docs/asciidoc/index.adoc
 
 TIP: This means that if you are using this plugin on a continous integration server like jenkins, you should have a workspace name (derived from the job name) matching the git repository name.
 
@@ -72,7 +73,7 @@ Example:
 If multiple possible roots are detected, the latest win.
 Example:
 
-    C:\git\asciidoctorj-gh-edit\target\checkout\src\docs\asciidoc\index.adoc
+    C:\git\asciidoctorj-git-link\target\checkout\src\docs\asciidoc\index.adoc
 
 In this last case the computed path is still: 
 
@@ -116,7 +117,7 @@ The value can be defined as `git-branch` attribute in the document.
 
 The `repository` agurment specifies the repository on GitHub (pattern: `<owner>/<repository-name>`).
 Depending on the case `<owner>` might be a GitHub user name or a GitHub organization name.
-For the repository of this project it would be `jmini/asciidoctorj-gh-edit`.
+For the repository of this project it would be `jmini/asciidoctorj-git-link`.
 
 The value can be defined as `git-repository` attribute in the document.
 
@@ -198,7 +199,7 @@ You need to add an additional repository to your pom:
 
 [source,xml]
 ----
-include::{rootdir}pom.xml[tags=mvn-repo]
+include::{rootdir}/pom.xml[tags=mvn-repo]
 ----
 
 Then you need to declare `com.bsiag.asciidoctorj:gh-edit` as a dependency for the `org.asciidoctor:asciidoctor-maven-plugin` plugin.
@@ -206,7 +207,7 @@ Your `<build>` section could looks like this:
 
 [source,xml]
 ----
-include::{rootdir}pom.xml[tags=mvn-plugin]
+include::{rootdir}/pom.xml[tags=mvn-plugin]
 ----
 
 === Asciidoctorj version
@@ -214,7 +215,9 @@ include::{rootdir}pom.xml[tags=mvn-plugin]
 This extension is build and tested with this version of asciidoctorj:
 
 ----
-include::{rootdir}pom.xml[tags=mvn-adocj]
+include::{rootdir}/pom.xml[tags=mvn-adocj-prop,indent=0]
+
+include::{rootdir}/pom.xml[tags=mvn-adocj-dep,indent=0]
 ----
 
 == Source Code

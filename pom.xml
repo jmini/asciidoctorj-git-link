@@ -3,10 +3,10 @@
   <groupId>com.bsiag.asciidoctorj</groupId>
   <artifactId>gh-edit</artifactId>
   <version>3.0.1-SNAPSHOT</version>
-<!-- tag::mvn-adocj[] -->
+<!-- tag::mvn-adocj-prop[] -->
   <properties>
     <asciidoctorj.version>1.5.4</asciidoctorj.version>
-<!-- end::mvn-adocj[] -->
+<!-- end::mvn-adocj-prop[] -->
     <asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
     <hamcrest.core.version>1.1</hamcrest.core.version>
     <junit.version>4.8</junit.version>
@@ -22,21 +22,21 @@
     <github.site.version>0.12</github.site.version>
     <github.global.server>github</github.global.server> <!-- this should match the sever id in your settings.xml -->
     <github.repository.owner>jmini</github.repository.owner>
-    <github.repository.name>asciidoctorj-gh-edit</github.repository.name>
+    <github.repository.name>asciidoctorj-git-link</github.repository.name>
     <github.commit.message>Update gh-pages to publish on GitHub pages.</github.commit.message>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!-- tag::mvn-adocj[] -->
+<!-- tag::mvn-adocj-prop[] -->
   </properties>
-<!-- end::mvn-adocj[] -->
+<!-- end::mvn-adocj-prop[] -->
   <dependencies>
+<!-- tag::mvn-adocj-dep[] -->
+    <!-- maven coordinates: -->
     <dependency>
-<!-- tag::mvn-adocj[] -->
-  <!-- maven coordinates: -->
       <groupId>org.asciidoctor</groupId>
       <artifactId>asciidoctorj</artifactId>
       <version>${asciidoctorj.version}</version>
-<!-- end::mvn-adocj[] -->
     </dependency>
+<!-- end::mvn-adocj-dep[] -->
     <dependency>
       <groupId>org.jruby</groupId>
       <artifactId>jruby-complete</artifactId>
@@ -169,15 +169,15 @@
   </repositories>
 <!-- end::mvn-repo[] -->
   <scm>
-    <connection>scm:git:https://github.com/jmini/asciidoctorj-gh-edit.git</connection>
-    <developerConnection>scm:git:git@github.com:jmini/asciidoctorj-gh-edit.git</developerConnection>
-    <url>https://github.com/jmini/asciidoctorj-gh-edit</url>
+    <connection>scm:git:https://github.com/jmini/asciidoctorj-git-link.git</connection>
+    <developerConnection>scm:git:git@github.com:jmini/asciidoctorj-git-link.git</developerConnection>
+    <url>https://github.com/jmini/asciidoctorj-git-link</url>
     <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <repository>
       <id>bintray.jmini.maven</id>
-      <url>https://api.bintray.com/maven/jmini/maven/asciidoctorj-gh-edit</url>
+      <url>https://api.bintray.com/maven/jmini/maven/asciidoctorj-git-link</url>
     </repository>
   </distributionManagement>
   <profiles>

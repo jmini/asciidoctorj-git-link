@@ -1,1 +1,1 @@
-Click on the git-link:self[repository='jmini/asciidoctorj-gh-edit', branch='features/patch123', mode='edit'] link.
+Click on the git-link:self[repository='jmini/asciidoctorj-git-link', branch='features/patch123', mode='edit'] link.

@@ -1,1 +1,1 @@
-Click on the git-link:self[mode="edit", repository="jmini/asciidoctorj-gh-edit"] link.
+Click on the git-link:self[mode="edit", repository="jmini/asciidoctorj-git-link"] link.

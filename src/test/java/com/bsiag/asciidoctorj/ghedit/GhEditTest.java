@@ -76,7 +76,7 @@ public class GhEditTest {
 
     Asciidoctor asciidoctor = Factory.create();
     HashMap<String, Object> attributes = new java.util.HashMap<String, Object>();
-    attributes.put("docfile", "C:/git/asciidoctorj-gh-edit/src/test/resources/" + fileName + ".adoc");
+    attributes.put("docfile", "C:/git/asciidoctorj-git-link/src/test/resources/" + fileName + ".adoc");
     HashMap<String, Object> options = new java.util.HashMap<String, Object>();
     options.put("attributes", attributes);
     String html = asciidoctor.convert(content, options);

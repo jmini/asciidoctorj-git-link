@@ -1,6 +1,6 @@
 //tag::vardef[]
 :gh-repo-owner: jmini
-:gh-repo-name: asciidoctorj-gh-edit
+:gh-repo-name: asciidoctorj-git-link
 :project-name: git-link&#58;&#91;&#93;
 :branch: master
 :twitter-handle: j2r2b
@@ -11,9 +11,9 @@
 
 :git-repository: {gh-repo-owner}/{gh-repo-name}
 :homepage: https://{gh-repo-owner}.github.io/{gh-repo-name}
-:issues: https://github.com/{repository}/issues
-:setup: https://raw.githubusercontent.com/{repository}/{branch}/{oomph-file}
-:src-folder-url: https://github.com/{repository}/tree/{branch}/{src-folder-name}
+:issues: https://github.com/{git-repository}/issues
+:setup: https://raw.githubusercontent.com/{git-repository}/{branch}/{oomph-file}
+:src-folder-url: https://github.com/{git-repository}/tree/{branch}/{src-folder-name}
 //end::vardef[]
 
 //tag::header[]
