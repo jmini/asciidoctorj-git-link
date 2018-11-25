@@ -516,7 +516,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="details">
 <span id="author" class="author">Jeremie Bresson</span><br>
 <span id="revnumber">version 3.0.0,</span>
-<span id="revdate">2016-08-12</span>
+<span id="revdate">2018-11-25</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -555,16 +555,16 @@ table.CodeRay td.code>pre{padding:0}
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://jmini.github.io/asciidoctorj-gh-edit">Project home</a> (this page)</p>
+<p><a href="https://jmini.github.io/asciidoctorj-git-link">Project home</a> (this page)</p>
 </li>
 <li>
-<p><a href="https://github.com/jmini/asciidoctorj-gh-edit">GitHub project</a></p>
+<p><a href="https://github.com/jmini/asciidoctorj-git-link">GitHub project</a></p>
 </li>
 <li>
-<p><a href="https://bintray.com/jmini/maven/asciidoctorj-gh-edit">Binaries on Bintray</a></p>
+<p><a href="https://bintray.com/jmini/maven/asciidoctorj-git-link">Binaries on Bintray</a></p>
 </li>
 <li>
-<p><a href="https://github.com/{repository}/issues">Issue tracker</a></p>
+<p><a href="https://github.com/jmini/asciidoctorj-git-link/issues">Issue tracker</a></p>
 </li>
 </ul>
 </div>
@@ -575,7 +575,7 @@ table.CodeRay td.code>pre{padding:0}
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Do you want to improve this page? Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/master/src/docs/asciidoc/index.adoc">edit it on GitHub</a>.
+Do you want to improve this page? Please <a href="https://github.com/jmini/asciidoctorj-git-link/edit/master/src/docs/asciidoc/index.adoc">edit it on GitHub</a>.
 </td>
 </tr>
 </table>
@@ -619,7 +619,7 @@ For example, for a file in this repository, this would a valid path:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>C:\git\asciidoctorj-gh-edit\src\docs\asciidoc\index.adoc</pre>
+<pre>C:\git\asciidoctorj-git-link\src\docs\asciidoc\index.adoc</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -635,7 +635,7 @@ For example, for a file in this repository, this would a valid path:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>~/git/asciidoctorj-gh-edit_repository/src/docs/asciidoc/index.adoc</pre>
+<pre>~/git/asciidoctorj-git-link_repository/src/docs/asciidoc/index.adoc</pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -669,7 +669,7 @@ Example:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>C:\git\asciidoctorj-gh-edit\target\checkout\src\docs\asciidoc\index.adoc</pre>
+<pre>C:\git\asciidoctorj-git-link\target\checkout\src\docs\asciidoc\index.adoc</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -743,7 +743,7 @@ If nothing is specified the default value <code>master</code> will be used.</p>
 <div class="paragraph">
 <p>The <code>repository</code> agurment specifies the repository on GitHub (pattern: <code>&lt;owner&gt;/&lt;repository-name&gt;</code>).
 Depending on the case <code>&lt;owner&gt;</code> might be a GitHub user name or a GitHub organization name.
-For the repository of this project it would be <code>jmini/asciidoctorj-gh-edit</code>.</p>
+For the repository of this project it would be <code>jmini/asciidoctorj-git-link</code>.</p>
 </div>
 <div class="paragraph">
 <p>The value can be defined as <code>git-repository</code> attribute in the document.</p>
@@ -798,7 +798,7 @@ Please notice that in this case the argument <a href="#sec-repository">repositor
 <div id="lst-empty" class="listingblock">
 <div class="title">Listing 2. Simple usage (no arguments)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">:git-repository: jmini/asciidoctorj-gh-edit
+<pre class="CodeRay highlight"><code data-lang="asciidoc">:git-repository: jmini/asciidoctorj-git-link
 :git-branch: patch-1
 
 Click on the git-link:self[] link.</code></pre>
@@ -808,7 +808,7 @@ Click on the git-link:self[] link.</code></pre>
 <div class="title">Example 2. Output (simple usage)</div>
 <div class="content">
 <div class="paragraph">
-<p>Click on the <a href="https://github.com/jmini/asciidoctorj-gh-edit/blob/master/src/docs/asciidoc/index.adoc">view on GitHub</a> link.</p>
+<p>Click on the <a href="https://github.com/jmini/asciidoctorj-git-link/blob/master/src/docs/asciidoc/index.adoc">view on GitHub</a> link.</p>
 </div>
 </div>
 </div>
@@ -819,14 +819,14 @@ Click on the git-link:self[] link.</code></pre>
 <div id="lst-twoattr" class="listingblock">
 <div class="title">Listing 3. Example with repository and branch as arguments (position attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the git-link:self[link, view, patch-1, jmini/asciidoctorj-gh-edit]!</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Click on the git-link:self[link, view, patch-1, jmini/asciidoctorj-git-link]!</code></pre>
 </div>
 </div>
 <div class="exampleblock">
 <div class="title">Example 3. Output (example with repository and branch)</div>
 <div class="content">
 <div class="paragraph">
-<p>Click on the <a href="https://github.com/jmini/asciidoctorj-gh-edit/blob/patch-1/src/docs/asciidoc/index.adoc">link</a>!</p>
+<p>Click on the <a href="https://github.com/jmini/asciidoctorj-git-link/blob/patch-1/src/docs/asciidoc/index.adoc">link</a>!</p>
 </div>
 </div>
 </div>
@@ -837,14 +837,14 @@ You can also change the link text:</p>
 <div id="lst-linktxt" class="listingblock">
 <div class="title">Listing 4. Example with repository and link text as arguments (named attribute)</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="asciidoc">Please git-link:self[mode=&quot;edit&quot;, repository=&quot;jmini/asciidoctorj-gh-edit&quot;, link-text=&quot;edit this page&quot;] on GitHub.</code></pre>
+<pre class="CodeRay highlight"><code data-lang="asciidoc">Please git-link:self[mode=&quot;edit&quot;, repository=&quot;jmini/asciidoctorj-git-link&quot;, link-text=&quot;edit this page&quot;] on GitHub.</code></pre>
 </div>
 </div>
 <div class="exampleblock">
 <div class="title">Example 4. Output (example with repository and link text)</div>
 <div class="content">
 <div class="paragraph">
-<p>Please <a href="https://github.com/jmini/asciidoctorj-gh-edit/edit/master/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
+<p>Please <a href="https://github.com/jmini/asciidoctorj-git-link/edit/master/src/docs/asciidoc/index.adoc">edit this page</a> on GitHub.</p>
 </div>
 </div>
 </div>
@@ -857,7 +857,12 @@ You need to add an additional repository to your pom:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">Unresolved directive in index.adoc - include::{rootdir}pom.xml[tags=mvn-repo]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">  <span class="tag">&lt;repositories&gt;</span>
+    <span class="tag">&lt;repository&gt;</span>
+      <span class="tag">&lt;id&gt;</span>bintray.jmini.maven<span class="tag">&lt;/id&gt;</span>
+      <span class="tag">&lt;url&gt;</span>http://dl.bintray.com/jmini/maven/<span class="tag">&lt;/url&gt;</span>
+    <span class="tag">&lt;/repository&gt;</span>
+  <span class="tag">&lt;/repositories&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -866,7 +871,25 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">Unresolved directive in index.adoc - include::{rootdir}pom.xml[tags=mvn-plugin]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">  <span class="tag">&lt;build&gt;</span>
+    <span class="tag">&lt;plugins&gt;</span>
+      <span class="tag">&lt;plugin&gt;</span>
+        <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
+        <span class="tag">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
+        <span class="tag">&lt;version&gt;</span>${asciidoctor.maven.plugin.version}<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;dependencies&gt;</span>
+          <span class="tag">&lt;dependency&gt;</span>
+            <span class="tag">&lt;groupId&gt;</span>com.bsiag.asciidoctorj<span class="tag">&lt;/groupId&gt;</span>
+            <span class="tag">&lt;artifactId&gt;</span>gh-edit<span class="tag">&lt;/artifactId&gt;</span>
+            <span class="tag">&lt;version&gt;</span>3.0.0<span class="tag">&lt;/version&gt;</span>
+          <span class="tag">&lt;/dependency&gt;</span>
+          <span class="comment">&lt;!-- ... (other dependencies) --&gt;</span>
+        <span class="tag">&lt;/dependencies&gt;</span>
+        <span class="comment">&lt;!-- ... (configuration and executions sections) --&gt;</span>
+      <span class="tag">&lt;/plugin&gt;</span>
+      <span class="comment">&lt;!-- ... (other plugins) --&gt;</span>
+    <span class="tag">&lt;/plugins&gt;</span>
+  <span class="tag">&lt;/build&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -877,7 +900,16 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Unresolved directive in index.adoc - include::{rootdir}pom.xml[tags=mvn-adocj]</pre>
+<pre>&lt;properties&gt;
+  &lt;asciidoctorj.version&gt;1.5.4&lt;/asciidoctorj.version&gt;
+&lt;/properties&gt;
+
+&lt;!-- maven coordinates: --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.asciidoctor&lt;/groupId&gt;
+  &lt;artifactId&gt;asciidoctorj&lt;/artifactId&gt;
+  &lt;version&gt;${asciidoctorj.version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
 </div>
 </div>
 </div>
@@ -890,7 +922,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 <p>As for any maven plugin, the source code of the plugin is available in the gh:viewdir[path='src', link-text='src'] folder.</p>
 </div>
 <div class="paragraph">
-<p>If you are using the Eclipse Installer (Oomph) you can use the <code>AsciidoctorjGhEdit.setup</code> File (<a href="https://raw.githubusercontent.com/{repository}/master/AsciidoctorjGhEdit.setup">url</a>) to setup your IDE properly.</p>
+<p>If you are using the Eclipse Installer (Oomph) you can use the <code>AsciidoctorjGhEdit.setup</code> File (<a href="https://raw.githubusercontent.com/jmini/asciidoctorj-git-link/master/AsciidoctorjGhEdit.setup">url</a>) to setup your IDE properly.</p>
 </div>
 <div class="sect2">
 <h3 id="build"><a class="anchor" href="#build"></a>Build</h3>
@@ -909,7 +941,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 <h2 id="get-in-touch"><a class="anchor" href="#get-in-touch"></a>Get in touch</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Use the <a href="https://github.com/{repository}/issues">git-link&#58;&#91;&#93; issue tracker</a> on GitHub.</p>
+<p>Use the <a href="https://github.com/jmini/asciidoctorj-git-link/issues">git-link&#58;&#91;&#93; issue tracker</a> on GitHub.</p>
 </div>
 <div class="paragraph">
 <p>You can also contact me on Twitter: <a href="https://twitter.com/j2r2b">@j2r2b</a></p>
@@ -928,7 +960,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.0.0<br>
-Last updated 2016-08-12 22:11:36 CEST
+Last updated 2018-11-25 15:43:22 +01:00
 </div>
 </div>
 </body>
