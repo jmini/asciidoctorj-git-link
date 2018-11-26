@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>fr.jmini.example</groupId>
+  <artifactId>maven-example</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+    <asciidoctorj.version>1.5.4</asciidoctorj.version>
+    <jruby.version>1.7.21</jruby.version>
+    <asciidoctor.maven.plugin.version>1.5.3</asciidoctor.maven.plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+<!-- tag::mvn-plugin[] -->
+  <build>
+    <plugins>
+<!-- end::mvn-plugin[] -->
+      <!-- Use asciidoctor to build the documentation -->
+<!-- tag::mvn-plugin[] -->
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${asciidoctor.maven.plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.bsiag.asciidoctorj</groupId>
+            <artifactId>gh-edit</artifactId>
+            <version>3.0.0</version>
+          </dependency>
+          <!-- ... (other dependencies) -->
+<!-- end::mvn-plugin[] -->
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj</artifactId>
+            <version>${asciidoctorj.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.jruby</groupId>
+            <artifactId>jruby-complete</artifactId>
+            <version>${jruby.version}</version>
+          </dependency>
+<!-- tag::mvn-plugin[] -->
+        </dependencies>
+        <!-- ... (configuration and executions sections) -->
+<!-- end::mvn-plugin[] -->
+        <configuration>
+          <sourceDirectory>docs</sourceDirectory>
+          <outputDirectory>${adoc.output}</outputDirectory>
+          <backend>html5</backend>
+          <sourceHighlighter>coderay</sourceHighlighter>
+          <attributes>
+            <revdate>${build.date}</revdate>
+            <sourcedir>${project.build.sourceDirectory}</sourcedir>
+            <project-version>${project.version}</project-version>
+            <toc>left</toc>
+            <icons>font</icons>
+            <sectanchors>true</sectanchors>
+            <idprefix />
+            <idseparator>-</idseparator>
+          </attributes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-adoc</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+          </execution>
+        </executions>
+<!-- tag::mvn-plugin[] -->
+      </plugin>
+      <!-- ... (other plugins) -->
+    </plugins>
+<!-- end::mvn-plugin[] -->
+    <defaultGoal>compile</defaultGoal>
+<!-- tag::mvn-plugin[] -->
+  </build>
+<!-- end::mvn-plugin[] -->
+<!-- tag::mvn-repo[] -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bintray.jmini.maven</id>
+      <url>http://dl.bintray.com/jmini/maven/</url>
+    </pluginRepository>
+  </pluginRepositories>
+<!-- end::mvn-repo[] -->
+</project>

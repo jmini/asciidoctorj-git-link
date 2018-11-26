@@ -1,0 +1,31 @@
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.9.1'
+}
+
+group = 'fr.jmini.example'
+version = '1.0.0-SNAPSHOT'
+
+// tag::task[]
+asciidoctor {
+    sourceDir = file('docs')
+    outputDir = file('build/generated-docs')
+    attributes \
+        'project-version' : "$version",
+        'imagesdir': '',
+        'toc': 'left',
+        'icons': 'font',
+        'setanchors': 'true',
+        'idprefix': '',
+        'idseparator': '-',
+        'docinfo1': 'true'
+    repositories {
+        maven {
+            url "http://dl.bintray.com/jmini/maven/"
+        }
+        jcenter()
+    }
+    dependencies {
+        asciidoctor "com.bsiag.asciidoctorj:gh-edit:3.0.0"
+    }
+}
+// end::task[]

@@ -1,0 +1,25 @@
+= Maven example
+
+This example describes how to use `git-link&#58;&#91;&#93;` in a maven build.
+
+//tag::maven-integration[]
+== Integration in a maven build
+
+The extension is not published on maven central.
+You need to add an additional repository to your pom:
+
+[source,xml]
+----
+include::pom.xml[tags=mvn-repo,indent=0]
+----
+
+Then you need to declare `com.bsiag.asciidoctorj:gh-edit` as a dependency for the `org.asciidoctor:asciidoctor-maven-plugin` plugin.
+Your `<build>` section could looks like this:
+
+[source,xml]
+----
+include::pom.xml[tags=mvn-plugin,indent=0]
+----
+
+For a complete example, see: git-link:usage/maven-example/pom.xml[pom.xml]
+//end::maven-integration[]

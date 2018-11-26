@@ -191,24 +191,9 @@ include::{srcdir}test/resources/test_with_link_text.adoc[]
 include::{srcdir}test/resources/test_with_link_text.adoc[]
 ====
 
+include::{rootdir}/usage/maven-example/README.adoc[leveloffset=1, tags=maven-integration]
 
-=== Add the extension to your pom.xml file
-
-The extension is the published on maven central.
-You need to add an additional repository to your pom:
-
-[source,xml]
-----
-include::{rootdir}/pom.xml[tags=mvn-repo]
-----
-
-Then you need to declare `com.bsiag.asciidoctorj:gh-edit` as a dependency for the `org.asciidoctor:asciidoctor-maven-plugin` plugin.
-Your `<build>` section could looks like this:
-
-[source,xml]
-----
-include::{rootdir}/pom.xml[tags=mvn-plugin]
-----
+include::{rootdir}/usage/gradle-example/README.adoc[leveloffset=1, tags=gradle-integration]
 
 === Asciidoctorj version
 

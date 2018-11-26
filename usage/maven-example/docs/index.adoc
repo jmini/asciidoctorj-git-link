@@ -1,0 +1,38 @@
+:git-repository: jmini/asciidoctorj-git-link
+
+= Maven example
+
+TIP: See the source of this page git-link:self[on GitHub].
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Suspendisse et purus tempus, fermentum diam sed, efficitur massa.
+Sed lacinia finibus dui et lobortis.
+Pellentesque et libero enim.
+Etiam arcu odio, faucibus non eros nec, mattis tristique mauris.
+Cras eget aliquet nibh.
+Curabitur in porta sem, maximus aliquet diam.
+Integer vitae augue eget ex viverra pharetra.
+In eu risus at diam lacinia dignissim.
+Duis vel mauris sed ex lobortis dictum.
+Nunc sagittis felis et turpis bibendum, id aliquam libero fermentum.
+Ut dolor nisi, congue nec lorem ac, commodo bibendum nunc.
+Nam ac felis elit.
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sapien orci, luctus nec ligula nec, ornare hendrerit nunc.
+Cras vitae consectetur turpis.
+
+Sed in risus rutrum, commodo quam nec, viverra nulla.
+Curabitur porta tincidunt urna.
+Aenean pulvinar sapien ex, id ultrices lacus consectetur ac.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Praesent et euismod est.
+Integer eleifend ornare accumsan.
+Etiam non nulla ut urna suscipit bibendum sed sed urna.
+Aenean maximus dictum venenatis.
+Nullam ultrices lorem sed rutrum egestas.
+Duis id felis at ex congue venenatis at non turpis.
+Praesent quis molestie justo.
+Nam a elementum elit.
+Nunc vehicula fermentum euismod.
+Etiam fermentum et purus sed interdum.
+
+See the complete git-link:usage/maven-example/pom.xml[pom.xml] on GitHub.
