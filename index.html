@@ -516,7 +516,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="details">
 <span id="author" class="author">Jeremie Bresson</span><br>
 <span id="revnumber">version 3.0.0,</span>
-<span id="revdate">2018-11-25</span>
+<span id="revdate">2018-11-26</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -527,7 +527,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#sec-target">Target argument</a></li>
 <li><a href="#additional-arguments">Additional arguments</a></li>
 <li><a href="#additional-examples">Additional examples</a></li>
-<li><a href="#add-the-extension-to-your-pom-xml-file">Add the extension to your pom.xml file</a></li>
+<li><a href="#integration-in-a-maven-build">Integration in a maven build</a></li>
+<li><a href="#integration-in-a-gradle-build">Integration in a gradle build</a></li>
 <li><a href="#asciidoctorj-version">Asciidoctorj version</a></li>
 </ul>
 </li>
@@ -850,19 +851,19 @@ You can also change the link text:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-the-extension-to-your-pom-xml-file"><a class="anchor" href="#add-the-extension-to-your-pom-xml-file"></a>Add the extension to your pom.xml file</h3>
+<h3 id="integration-in-a-maven-build"><a class="anchor" href="#integration-in-a-maven-build"></a>Integration in a maven build</h3>
 <div class="paragraph">
-<p>The extension is the published on maven central.
+<p>The extension is not published on maven central.
 You need to add an additional repository to your pom:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">  <span class="tag">&lt;repositories&gt;</span>
-    <span class="tag">&lt;repository&gt;</span>
-      <span class="tag">&lt;id&gt;</span>bintray.jmini.maven<span class="tag">&lt;/id&gt;</span>
-      <span class="tag">&lt;url&gt;</span>http://dl.bintray.com/jmini/maven/<span class="tag">&lt;/url&gt;</span>
-    <span class="tag">&lt;/repository&gt;</span>
-  <span class="tag">&lt;/repositories&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;pluginRepositories&gt;</span>
+  <span class="tag">&lt;pluginRepository&gt;</span>
+    <span class="tag">&lt;id&gt;</span>bintray.jmini.maven<span class="tag">&lt;/id&gt;</span>
+    <span class="tag">&lt;url&gt;</span>http://dl.bintray.com/jmini/maven/<span class="tag">&lt;/url&gt;</span>
+  <span class="tag">&lt;/pluginRepository&gt;</span>
+<span class="tag">&lt;/pluginRepositories&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -871,26 +872,65 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">  <span class="tag">&lt;build&gt;</span>
-    <span class="tag">&lt;plugins&gt;</span>
-      <span class="tag">&lt;plugin&gt;</span>
-        <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
-        <span class="tag">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
-        <span class="tag">&lt;version&gt;</span>${asciidoctor.maven.plugin.version}<span class="tag">&lt;/version&gt;</span>
-        <span class="tag">&lt;dependencies&gt;</span>
-          <span class="tag">&lt;dependency&gt;</span>
-            <span class="tag">&lt;groupId&gt;</span>com.bsiag.asciidoctorj<span class="tag">&lt;/groupId&gt;</span>
-            <span class="tag">&lt;artifactId&gt;</span>gh-edit<span class="tag">&lt;/artifactId&gt;</span>
-            <span class="tag">&lt;version&gt;</span>3.0.0<span class="tag">&lt;/version&gt;</span>
-          <span class="tag">&lt;/dependency&gt;</span>
-          <span class="comment">&lt;!-- ... (other dependencies) --&gt;</span>
-        <span class="tag">&lt;/dependencies&gt;</span>
-        <span class="comment">&lt;!-- ... (configuration and executions sections) --&gt;</span>
-      <span class="tag">&lt;/plugin&gt;</span>
-      <span class="comment">&lt;!-- ... (other plugins) --&gt;</span>
-    <span class="tag">&lt;/plugins&gt;</span>
-  <span class="tag">&lt;/build&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;build&gt;</span>
+  <span class="tag">&lt;plugins&gt;</span>
+    <span class="tag">&lt;plugin&gt;</span>
+      <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
+      <span class="tag">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
+      <span class="tag">&lt;version&gt;</span>${asciidoctor.maven.plugin.version}<span class="tag">&lt;/version&gt;</span>
+      <span class="tag">&lt;dependencies&gt;</span>
+        <span class="tag">&lt;dependency&gt;</span>
+          <span class="tag">&lt;groupId&gt;</span>com.bsiag.asciidoctorj<span class="tag">&lt;/groupId&gt;</span>
+          <span class="tag">&lt;artifactId&gt;</span>gh-edit<span class="tag">&lt;/artifactId&gt;</span>
+          <span class="tag">&lt;version&gt;</span>3.0.0<span class="tag">&lt;/version&gt;</span>
+        <span class="tag">&lt;/dependency&gt;</span>
+        <span class="comment">&lt;!-- ... (other dependencies) --&gt;</span>
+      <span class="tag">&lt;/dependencies&gt;</span>
+      <span class="comment">&lt;!-- ... (configuration and executions sections) --&gt;</span>
+    <span class="tag">&lt;/plugin&gt;</span>
+    <span class="comment">&lt;!-- ... (other plugins) --&gt;</span>
+  <span class="tag">&lt;/plugins&gt;</span>
+<span class="tag">&lt;/build&gt;</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/master/usage/maven-example/pom.xml">pom.xml</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="integration-in-a-gradle-build"><a class="anchor" href="#integration-in-a-gradle-build"></a>Integration in a gradle build</h3>
+<div class="paragraph">
+<p>The extension is not published on maven central.
+You need to add an additional repository near the dependency in the task:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="gralde">asciidoctor {
+    sourceDir = file('docs')
+    outputDir = file('build/generated-docs')
+    attributes \
+        'project-version' : &quot;$version&quot;,
+        'imagesdir': '',
+        'toc': 'left',
+        'icons': 'font',
+        'setanchors': 'true',
+        'idprefix': '',
+        'idseparator': '-',
+        'docinfo1': 'true'
+    repositories {
+        maven {
+            url &quot;http://dl.bintray.com/jmini/maven/&quot;
+        }
+        jcenter()
+    }
+    dependencies {
+        asciidoctor &quot;com.bsiag.asciidoctorj:gh-edit:3.0.0&quot;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/master/usage/gradle-example/build.gradle">build.gradle</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -960,7 +1000,7 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 <div id="footer">
 <div id="footer-text">
 Version 3.0.0<br>
-Last updated 2018-11-25 15:43:22 +01:00
+Last updated 2018-11-26 22:05:36 +01:00
 </div>
 </div>
 </body>
