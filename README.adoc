@@ -6,7 +6,7 @@
 :twitter-handle: j2r2b
 :license: http://www.eclipse.org/legal/epl-v10.html
 :license-name: Eclipse Public License - v 1.0
-:oomph-file: AsciidoctorjGhEdit.setup
+:oomph-file: AsciidoctorjGitLink.setup
 :src-folder-name: src
 
 :git-repository: {gh-repo-owner}/{gh-repo-name}

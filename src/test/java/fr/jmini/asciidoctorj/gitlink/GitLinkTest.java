@@ -8,7 +8,7 @@
  * Contributors:
  *     Jeremie Bresson - initial API and implementation
  ******************************************************************************/
-package com.bsiag.asciidoctorj.ghedit;
+package fr.jmini.asciidoctorj.gitlink;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.junit.Test;
 
-public class GhEditTest {
+public class GitLinkTest {
 
   @Test
   public void testSimple() throws Exception {

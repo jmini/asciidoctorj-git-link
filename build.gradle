@@ -1,0 +1,123 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'org.asciidoctor.convert' version '1.5.9.2'
+    id 'org.ajoberstar.git-publish' version '2.0.0'
+    id 'net.researchgate.release' version '2.6.0'
+}
+
+group = 'fr.jmini.asciidoctorj'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+dependencies {
+// tag::adocj-dep[]
+    compile "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"
+// end::adocj-dep[]
+
+    testCompile "junit:junit:4.8"
+    testCompile "org.hamcrest:hamcrest-core:1.1"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                description = 'AsciidoctorJ macro to create links to git repositories'
+                url = 'https://' + "$githubRepositoryOwner" + '.github.io/' + "$githubRepositoryName" + '/'
+                licenses {
+                    license {
+                        name = 'Eclipse Public License - v 1.0'
+                        url = 'http://www.eclipse.org/legal/epl-v10.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jmini'
+                        name = 'Jeremie Bresson'
+                        email = 'dev@jmini.fr'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '.git'
+                    developerConnection = 'scm:git:https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '.git'
+                    url = 'https://github.com/' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '/'
+                }
+            }
+            from components.java
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        maven {
+            url = mavenPublishUrl
+            credentials {
+                username = project.findProperty("bintrayUser") ?: ""
+                password = project.findProperty("bintrayPassword") ?: ""
+            }
+        }
+    }
+}
+
+def buildDate() {
+    return new Date().format('yyyy-MM-dd')
+}
+
+asciidoctor {
+    sourceDir = file('src/docs/asciidoc')
+    outputDir = file('build/docs')
+    attributes \
+        'revdate': "${buildDate()}",
+        'project-version' : "$version",
+        'asciidoctorj-version': "$asciidoctorjVersion",
+        'source-highlighter': 'coderay',
+        'imagesdir': '',
+        'toc': 'left',
+        'icons': 'font',
+        'setanchors': 'true',
+        'idprefix': '',
+        'idseparator': '-',
+        'docinfo1': 'true'
+
+    dependencies {
+        asciidoctor project(':')
+    }
+}
+
+gitPublish {
+    repoUri = 'git@github.com:' + "$githubRepositoryOwner" + '/' + "$githubRepositoryName" + '.git'
+    branch = 'gh-pages'
+
+    contents {
+        from "${file('build/docs/html5')}"
+    }
+
+    preserve {
+        include '.nojekyll'
+        exclude '.DS_Store'
+    }
+
+    commitMessage = "Update the 'gh-pages' branch."
+}
+
+release {
+    buildTasks = ['doRelease']
+}
+
+task doRelease {
+    dependsOn(
+        'publish',
+        'asciidoctor',
+        'gitPublishPush'
+    )
+}

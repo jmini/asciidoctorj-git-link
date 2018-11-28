@@ -8,41 +8,41 @@
  * Contributors:
  *     Jeremie Bresson - initial API and implementation
  ******************************************************************************/
-package com.bsiag.asciidoctorj.ghedit.internal;
+package fr.jmini.asciidoctorj.gitlink.internal;
 
-public final class GhEditUtility {
+public final class GitLinkUtility {
   private static final String TARGET_CHECKOUT = "target/checkout";
   static final String DEFAULT_EDIT_TEXT = "edit on GitHub";
   static final String DEFAULT_VIEW_TEXT = "view on GitHub";
   static final String DEFAULT_BRANCH = "master";
-  static final String WARN_UNEXPECTED_MODE = "gh-edit: The mode is unexpected, using 'edit' as fallback.";
-  static final String WARN_NO_REPOSITORY_SET = "gh-edit: There is no repository set.";
-  static final String WARN_FILE_UNKNWON = "gh-edit: path and asciidoctor docfile are unknown";
-  static final String WARN_UNEXPECTED_REPOSITORY = "gh-edit: unexpected repository, should match the GitHub pattern {user}/{git-repository}, current value: ";
+  static final String WARN_UNEXPECTED_MODE = "git-link: The mode is unexpected, using 'edit' as fallback.";
+  static final String WARN_NO_REPOSITORY_SET = "git-link: There is no repository set.";
+  static final String WARN_FILE_UNKNWON = "git-link: path and asciidoctor docfile are unknown";
+  static final String WARN_UNEXPECTED_REPOSITORY = "git-link: unexpected repository, should match the GitHub pattern {user}/{git-repository}, current value: ";
 
-  public static GhEditLink compute(String target, Object modeInput, Object server, Object repository, Object branch, Object linkText, Object file) {
-    GhEditLink result = new GhEditLink();
+  public static GitLink compute(String target, Object modeInput, Object server, Object repository, Object branch, Object linkText, Object file) {
+    GitLink result = new GitLink();
 
     //Mode:
-    GhMode mode = null;
+    GitLinkMode mode = null;
     if (target != null && !"self".equals(target)) {
       if (target.endsWith("/")) {
-        mode = GhMode.VIEWDIR;
+        mode = GitLinkMode.VIEWDIR;
       }
     }
     if (mode == null) {
       if (modeInput != null && !modeInput.toString().isEmpty()) {
         try {
-          mode = GhMode.valueOf(modeInput.toString().toUpperCase());
+          mode = GitLinkMode.valueOf(modeInput.toString().toUpperCase());
         }
         catch (IllegalArgumentException e) {
           result.setWarning(WARN_UNEXPECTED_MODE);
-          mode = GhMode.VIEW;
+          mode = GitLinkMode.VIEW;
         }
       }
       else {
         result.setWarning(WARN_UNEXPECTED_MODE);
-        mode = GhMode.VIEW;
+        mode = GitLinkMode.VIEW;
       }
     }
 
@@ -164,6 +164,6 @@ public final class GhEditUtility {
     }
   }
 
-  private GhEditUtility() {
+  private GitLinkUtility() {
   }
 }

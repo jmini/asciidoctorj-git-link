@@ -8,35 +8,8 @@
  * Contributors:
  *     Jeremie Bresson - initial API and implementation
  ******************************************************************************/
-package com.bsiag.asciidoctorj.ghedit.internal;
+package fr.jmini.asciidoctorj.gitlink.internal;
 
-public class GhEditLink {
-  private String url;
-  private String text;
-  private String warning;
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public String getWarning() {
-    return warning;
-  }
-
-  public void setWarning(String warning) {
-    this.warning = warning;
-  }
-
+public enum GitLinkMode {
+  EDIT, VIEW, VIEWDIR
 }

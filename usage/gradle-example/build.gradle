@@ -25,7 +25,7 @@ asciidoctor {
         jcenter()
     }
     dependencies {
-        asciidoctor "com.bsiag.asciidoctorj:gh-edit:3.0.0"
+        asciidoctor "fr.jmini.asciidoctorj:git-link:3.0.0"
     }
 }
 // end::task[]

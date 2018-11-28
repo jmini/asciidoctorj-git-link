@@ -8,7 +8,7 @@
  * Contributors:
  *     Jeremie Bresson - initial API and implementation
  ******************************************************************************/
-package com.bsiag.asciidoctorj.ghedit;
+package fr.jmini.asciidoctorj.gitlink;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,17 +18,17 @@ import org.asciidoctor.ast.Inline;
 import org.asciidoctor.extension.InlineMacroProcessor;
 import org.jruby.RubySymbol;
 
-import com.bsiag.asciidoctorj.ghedit.internal.GhEditLink;
-import com.bsiag.asciidoctorj.ghedit.internal.GhEditUtility;
+import fr.jmini.asciidoctorj.gitlink.internal.GitLink;
+import fr.jmini.asciidoctorj.gitlink.internal.GitLinkUtility;
 
-public class GhEditMacro extends InlineMacroProcessor {
+public class GitLinkMacro extends InlineMacroProcessor {
 
-  public GhEditMacro(String macroName, Map<String, Object> config) {
+  public GitLinkMacro(String macroName, Map<String, Object> config) {
     super(macroName, config);
   }
 
   @Override
-  protected Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
+  public Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
     Object docFile = searchDocFile(parent);
 
     Object linkText = searchAttribute(attributes, "link-text", 1, parent, null);
@@ -38,7 +38,7 @@ public class GhEditMacro extends InlineMacroProcessor {
     Object linkWindow = searchAttribute(attributes, "link-window", 5, parent, null);
     Object server = searchAttribute(attributes, "server", 6, parent, "git-server");
 
-    GhEditLink link = GhEditUtility.compute(path, mode, server, repository, branch, linkText, docFile);
+    GitLink link = GitLinkUtility.compute(path, mode, server, repository, branch, linkText, docFile);
 
     if (link.getWarning() != null) {
       //TODO: log a warning containing link.getWarning()

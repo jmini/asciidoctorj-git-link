@@ -23,7 +23,7 @@ TIP: Do you want to improve this page? Please git-link:self[edit it on GitHub, e
 
 == Usage
 
-If you want to use the extension in your code, just write `gh:<target>[<arguments>]`.
+If you want to use the extension in your code, just write `git-link&#58;<target>&#91;<arguments>&#93;`.
 <<lst-all>> provides a complete example, that creates a link to edit a file on a GitHub repo:
 
 [[lst-all, Listing 1]]
@@ -77,7 +77,7 @@ Example:
 
 In this last case the computed path is still: 
 
-    src\docs\asciidoc\index.adoc
+    src/docs/asciidoc/index.adoc
 
 
 === Additional arguments
@@ -197,25 +197,65 @@ include::{rootdir}/usage/gradle-example/README.adoc[leveloffset=1, tags=gradle-i
 
 === Asciidoctorj version
 
-This extension is build and tested with this version of asciidoctorj:
+This extension is built and tested with version `{asciidoctorj-version}` of asciidoctorj.
+See the corresponding line in the `dependencies` section of the gradle build file:
 
 ----
-include::{rootdir}/pom.xml[tags=mvn-adocj-prop,indent=0]
-
-include::{rootdir}/pom.xml[tags=mvn-adocj-dep,indent=0]
+include::{rootdir}/build.gradle[tags=adocj-dep,indent=0]
 ----
 
 == Source Code
 
-As for any maven plugin, the source code of the plugin is available in the gh:viewdir[path='src', link-text='src'] folder.
+As for any grade plugin, the source code of the plugin is available in the git-link:src/[src/] folder.
 
 If you are using the Eclipse Installer (Oomph) you can use the `{oomph-file}` File (link:{setup}[url]) to setup your IDE properly.
 
 === Build
 
-Run maven install on the root pom file:
+Run gradle at the root of the repository:
 
-  mvn install
+----
+./gradlew build
+----
+
+Deploy to local maven repository:
+
+----
+./gradlew publishToMavenLocal
+----
+
+Build the documentation page:
+
+----
+./gradlew asciidoctor
+----
+
+Upload the documentation page on GitHub pages:
+
+----
+./gradlew gitPublishPush
+----
+
+Perform a release:
+
+----
+./gradlew release -Prelease.useAutomaticVersion=true
+----
+
+==== Using ssh-agent
+
+Some tasks requires to push into the distant git repository (release task or updating the `gh-pages` branch).
+If they are failing with errors like this:
+----
+org.eclipse.jgit.api.errors.TransportException: ... Permission denied (publickey).
+---- 
+
+Then `ssh-agent` can be used.
+----
+eval `ssh-agent -s`
+ssh-add ~/.ssh/id_rsa
+----
+(link:https://superuser.com/a/990447/[source] for this approach)
 
 include::{github-readme}[tags=contact-section]
 

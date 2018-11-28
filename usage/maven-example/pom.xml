@@ -22,8 +22,8 @@
         <version>${asciidoctor.maven.plugin.version}</version>
         <dependencies>
           <dependency>
-            <groupId>com.bsiag.asciidoctorj</groupId>
-            <artifactId>gh-edit</artifactId>
+            <groupId>fr.jmini.asciidoctorj</groupId>
+            <artifactId>git-link</artifactId>
             <version>3.0.0</version>
           </dependency>
           <!-- ... (other dependencies) -->
