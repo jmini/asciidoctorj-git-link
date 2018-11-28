@@ -28,10 +28,10 @@ public class GhEditMacro extends InlineMacroProcessor {
   }
 
   @Override
-  protected Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
+  public Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
     Object docFile = searchDocFile(parent);
 
-    Object linkText = searchAttribute(attributes, "link-text", 1, parent, null);
+    Object linkText = "XXX" + searchAttribute(attributes, "link-text", 1, parent, null);
     Object mode = searchAttribute(attributes, "mode", 2, parent, "git-link-mode");
     Object branch = searchAttribute(attributes, "branch", 3, parent, "git-branch");
     Object repository = searchAttribute(attributes, "repository", 4, parent, "git-repository");
