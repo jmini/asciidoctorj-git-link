@@ -2,6 +2,10 @@ plugins {
     id 'org.asciidoctor.convert' version '1.5.9.1'
 }
 
+wrapper {
+    gradleVersion = '5.0'
+}
+
 group = 'fr.jmini.example'
 version = '1.0.0-SNAPSHOT'
 
@@ -9,15 +13,15 @@ version = '1.0.0-SNAPSHOT'
 asciidoctor {
     sourceDir = file('docs')
     outputDir = file('build/generated-docs')
-    attributes \
-        'project-version' : "$version",
-        'imagesdir': '',
-        'toc': 'left',
-        'icons': 'font',
-        'setanchors': 'true',
-        'idprefix': '',
-        'idseparator': '-',
-        'docinfo1': 'true'
+    attributes = ['project-version'   : "$version",
+                  'source-highlighter': 'coderay',
+                  'imagesdir'         : '',
+                  'toc'               : 'left',
+                  'icons'             : 'font',
+                  'setanchors'        : 'true',
+                  'idprefix'          : '',
+                  'idseparator'       : '-',
+                  'docinfo1'          : 'true']
     repositories {
         maven {
             url "http://dl.bintray.com/jmini/maven/"

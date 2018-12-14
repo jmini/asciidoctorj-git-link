@@ -6,6 +6,10 @@ plugins {
     id 'net.researchgate.release' version '2.6.0'
 }
 
+wrapper {
+    gradleVersion = '5.0'
+}
+
 group = 'fr.jmini.asciidoctorj'
 
 sourceCompatibility = 1.8
@@ -76,19 +80,17 @@ def buildDate() {
 asciidoctor {
     sourceDir = file('src/docs/asciidoc')
     outputDir = file('build/docs')
-    attributes \
-        'revdate': "${buildDate()}",
-        'project-version' : "$version",
-        'asciidoctorj-version': "$asciidoctorjVersion",
-        'source-highlighter': 'coderay',
-        'imagesdir': '',
-        'toc': 'left',
-        'icons': 'font',
-        'setanchors': 'true',
-        'idprefix': '',
-        'idseparator': '-',
-        'docinfo1': 'true'
-
+    attributes = ['revdate'             : "${buildDate()}",
+                  'project-version'     : "$version",
+                  'asciidoctorj-version': "$asciidoctorjVersion",
+                  'source-highlighter'  : 'coderay',
+                  'imagesdir'           : '',
+                  'toc'                 : 'left',
+                  'icons'               : 'font',
+                  'setanchors'          : 'true',
+                  'idprefix'            : '',
+                  'idseparator'         : '-',
+                  'docinfo1'            : 'true']
     dependencies {
         asciidoctor project(':')
     }
