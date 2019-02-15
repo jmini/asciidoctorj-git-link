@@ -13,10 +13,9 @@ package fr.jmini.asciidoctorj.gitlink;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.asciidoctor.ast.AbstractBlock;
-import org.asciidoctor.ast.Inline;
+import org.asciidoctor.ast.ContentNode;
+import org.asciidoctor.ast.PhraseNode;
 import org.asciidoctor.extension.InlineMacroProcessor;
-import org.jruby.RubySymbol;
 
 import fr.jmini.asciidoctorj.gitlink.internal.GitLink;
 import fr.jmini.asciidoctorj.gitlink.internal.GitLinkUtility;
@@ -28,15 +27,15 @@ public class GitLinkMacro extends InlineMacroProcessor {
   }
 
   @Override
-  public Object process(AbstractBlock parent, String path, Map<String, Object> attributes) {
+  public Object process(ContentNode parent, String path, Map<String, Object> attributes) {
     Object docFile = searchDocFile(parent);
 
-    Object linkText = searchAttribute(attributes, "link-text", 1, parent, null);
-    Object mode = searchAttribute(attributes, "mode", 2, parent, "git-link-mode");
-    Object branch = searchAttribute(attributes, "branch", 3, parent, "git-branch");
-    Object repository = searchAttribute(attributes, "repository", 4, parent, "git-repository");
-    Object linkWindow = searchAttribute(attributes, "link-window", 5, parent, null);
-    Object server = searchAttribute(attributes, "server", 6, parent, "git-server");
+    Object linkText = searchAttribute(attributes, "link-text", "1", parent, null);
+    Object mode = searchAttribute(attributes, "mode", "2", parent, "git-link-mode");
+    Object branch = searchAttribute(attributes, "branch", "3", parent, "git-branch");
+    Object repository = searchAttribute(attributes, "repository", "4", parent, "git-repository");
+    Object linkWindow = searchAttribute(attributes, "link-window", "5", parent, null);
+    Object server = searchAttribute(attributes, "server", "6", parent, "git-server");
 
     GitLink link = GitLinkUtility.compute(path, mode, server, repository, branch, linkText, docFile);
 
@@ -59,14 +58,14 @@ public class GitLinkMacro extends InlineMacroProcessor {
       }
 
       // Create the 'anchor' node:
-      Inline inline = createInline(parent, "anchor", link.getText(), attributes, options);
+      PhraseNode inline = createPhraseNode(parent, "anchor", link.getText(), attributes, options);
 
       // Convert to String value:
       return inline.convert();
     }
   }
 
-  private Object searchAttribute(Map<String, Object> attributes, String attrKey, int attrPosition, AbstractBlock parent, String attrDocumentKey) {
+  private Object searchAttribute(Map<String, Object> attributes, String attrKey, String attrPosition, ContentNode parent, String attrDocumentKey) {
     Object result;
     //Try to get the attribute by key:
     result = attributes.get(attrKey);
@@ -80,7 +79,7 @@ public class GitLinkMacro extends InlineMacroProcessor {
     }
     //Try to get the attribute in the document:
     if (attrDocumentKey != null) {
-      return parent.getDocument().getAttr(attrDocumentKey);
+      return parent.getDocument().getAttribute(attrDocumentKey);
     }
     //Not found:
     return null;
@@ -90,18 +89,17 @@ public class GitLinkMacro extends InlineMacroProcessor {
    * @param parent
    * @return
    */
-  private String searchDocFile(AbstractBlock parent) {
+  private String searchDocFile(ContentNode parent) {
     Map<Object, Object> options = parent.getDocument().getOptions();
-    for (Object optionKeyObj : options.keySet()) {
-      if (optionKeyObj instanceof RubySymbol) {
-        if ("attributes".equals(((RubySymbol) optionKeyObj).toJava(String.class))) {
-          Object attributesObj = options.get(optionKeyObj);
-          if (attributesObj instanceof Map<?, ?>) {
-            Map<?, ?> attributes = (Map<?, ?>) attributesObj;
-            Object docfile = attributes.get("docfile");
-            if (docfile != null) {
-              return docfile.toString();
-            }
+    for (Object optionKey : options.keySet()) {
+
+      if ("attributes".equals(optionKey)) {
+        Object attributesObj = options.get(optionKey);
+        if (attributesObj instanceof Map<?, ?>) {
+          Map<?, ?> attributes = (Map<?, ?>) attributesObj;
+          Object docfile = attributes.get("docfile");
+          if (docfile != null) {
+            return docfile.toString();
           }
         }
       }
