@@ -9,6 +9,10 @@ wrapper {
 group = 'fr.jmini.example'
 version = '1.0.0-SNAPSHOT'
 
+asciidoctorj {
+    version = '1.6.1'
+}
+
 // tag::task[]
 asciidoctor {
     sourceDir = file('docs')
@@ -26,7 +30,7 @@ asciidoctor {
         mavenCentral()
     }
     dependencies {
-        asciidoctor "fr.jmini.asciidoctorj:git-link:3.0.0"
+        asciidoctor "fr.jmini.asciidoctorj:git-link:3.1.0"
     }
 }
 // end::task[]
