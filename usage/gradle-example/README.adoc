@@ -5,13 +5,12 @@ This example describes how to use `git-link&#58;&#91;&#93;` in a gradle build.
 //tag::gradle-integration[]
 == Integration in a gradle build
 
-The extension is not published on maven central.
-You need to add an additional repository near the dependency in the task:
+The extension is published on maven central.
+It can be consumed as dependency of the `asciidoctor` task:
 
 [source,gralde]
 ----
 include::build.gradle[tags=task,indent=0]
 ----
 
-For a complete example, see: git-link:usage/gradle-example/build.gradle[build.gradle]
 //end::gradle-integration[]

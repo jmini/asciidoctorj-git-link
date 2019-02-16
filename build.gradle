@@ -42,9 +42,7 @@ signing {
 }
 
 dependencies {
-// tag::adocj-dep[]
     compile "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"
-// end::adocj-dep[]
 
     testCompile "junit:junit:4.8"
     testCompile "org.hamcrest:hamcrest-core:1.1"
@@ -143,7 +141,7 @@ asciidoctor {
                   'imagesdir'           : '',
                   'toc'                 : 'left',
                   'icons'               : 'font',
-                  'setanchors'          : 'true',
+                  'sectanchors'         : 'true',
                   'idprefix'            : '',
                   'idseparator'         : '-',
                   'docinfo1'            : 'true']

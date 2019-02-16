@@ -193,16 +193,22 @@ include::{srcdir}test/resources/test_with_link_text.adoc[]
 
 include::{rootdir}/usage/maven-example/README.adoc[leveloffset=1, tags=maven-integration]
 
+For a complete example, see: git-link:usage/maven-example/pom.xml[pom.xml, branch="master"]
+
 include::{rootdir}/usage/gradle-example/README.adoc[leveloffset=1, tags=gradle-integration]
 
-=== Asciidoctorj version
+For a complete example, see: git-link:usage/gradle-example/build.gradle[build.gradle, branch="master"]
 
-This extension is built and tested with version `{asciidoctorj-version}` of asciidoctorj.
-See the corresponding line in the `dependencies` section of the gradle build file:
+=== Which version should I use?
 
-----
-include::{rootdir}/build.gradle[tags=adocj-dep,indent=0]
-----
+[cols="2*^"]
+|===
+| Asciidoctorj version | git-link&#58;&#91;&#93; version
+| `1.5.x` | `3.0.0`
+| `1.6.x` | `3.1.0`
+|===
+
+The lattest version of this extension is built and tested with version `{asciidoctorj-version}` of `org.asciidoctor:asciidoctorj`.
 
 == Source Code
 
@@ -212,31 +218,46 @@ If you are using the Eclipse Installer (Oomph) you can use the `{oomph-file}` Fi
 
 === Build
 
-Run gradle at the root of the repository:
+This project is using gradle.
+
+Command to build the sources locally:
 
 ----
 ./gradlew build
 ----
 
-Deploy to local maven repository:
+Command to deploy to your local maven repository:
 
 ----
 ./gradlew publishToMavenLocal
 ----
 
-Build the documentation page:
+Command to build the documentation page:
 
 ----
 ./gradlew asciidoctor
 ----
 
-Upload the documentation page on GitHub pages:
+The output of this command is an HTML page located at `<git repo root>/build/docs/html5/index.html`.
+
+==== For project maintainers
+
+`signing.gnupg.keyName` and `signing.gnupg.passphrase` are expected to be set in your local `gradle.properties` file to be able to sign.
+`sonatypeUser` and `sonatypePassword` are expected to be set in order to be able to publish to a distant repository.
+					
+Command to build and publish the result in a distant maven repository:
+
+----
+./gradlew publish
+----
+
+Command to upload the documentation page on GitHub pages:
 
 ----
 ./gradlew gitPublishPush
 ----
 
-Perform a release:
+Command to perform a release:
 
 ----
 ./gradlew release -Prelease.useAutomaticVersion=true
@@ -256,6 +277,7 @@ eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa
 ----
 (link:https://superuser.com/a/990447/[source] for this approach)
+
 
 include::{github-readme}[tags=contact-section]
 

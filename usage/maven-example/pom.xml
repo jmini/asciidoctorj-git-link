@@ -76,12 +76,4 @@
 <!-- tag::mvn-plugin[] -->
   </build>
 <!-- end::mvn-plugin[] -->
-<!-- tag::mvn-repo[] -->
-  <pluginRepositories>
-    <pluginRepository>
-      <id>bintray.jmini.maven</id>
-      <url>http://dl.bintray.com/jmini/maven/</url>
-    </pluginRepository>
-  </pluginRepositories>
-<!-- end::mvn-repo[] -->
 </project>
