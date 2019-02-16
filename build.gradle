@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'signing'
     id 'org.asciidoctor.convert' version '1.5.9.2'
     id 'org.ajoberstar.git-publish' version '2.0.0'
     id 'net.researchgate.release' version '2.6.0'
@@ -24,6 +25,22 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+signing {
+    useGpgCmd()
+    sign configurations.archives
+}
+
 dependencies {
 // tag::adocj-dep[]
     compile "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"
@@ -37,7 +54,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             pom {
+                name = 'AsciidoctorJ git-link'
                 description = 'AsciidoctorJ macro to create links to git repositories'
+                packaging = 'jar'
                 url = 'https://' + "$githubRepositoryOwner" + '.github.io/' + "$githubRepositoryName" + '/'
                 licenses {
                     license {
@@ -60,21 +79,58 @@ publishing {
             }
             from components.java
             artifact sourcesJar
+            artifact javadocJar
+
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated-pom.xml")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+                pomFile.delete()
+            }
+
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
+            }
         }
     }
     repositories {
         maven {
-            url = mavenPublishUrl
+            url = version.endsWith('SNAPSHOT') ? mavenPublishUrlSnapshot : mavenPublishUrlRelease
             credentials {
-                username = project.findProperty("bintrayUser") ?: ""
-                password = project.findProperty("bintrayPassword") ?: ""
+                username = project.findProperty('sonatypeUser') ?: ''
+                password = project.findProperty('sonatypePassword') ?: ''
             }
         }
     }
 }
 
+model {
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn(project.tasks.signArchives)
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn(project.tasks.signArchives)
+    }
+}
+
 def buildDate() {
     return new Date().format('yyyy-MM-dd')
+}
+
+asciidoctorj {
+    version = "$asciidoctorjVersion"
 }
 
 asciidoctor {
