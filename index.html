@@ -528,8 +528,8 @@ table.CodeRay td.code>pre{padding:0}
 <h1>git-link&#58;&#91;&#93;</h1>
 <div class="details">
 <span id="author" class="author">Jeremie Bresson</span><br>
-<span id="revnumber">version 3.0.0,</span>
-<span id="revdate">2018-11-28</span>
+<span id="revnumber">version 3.1.0,</span>
+<span id="revdate">2019-02-16</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -542,7 +542,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#additional-examples">Additional examples</a></li>
 <li><a href="#integration-in-a-maven-build">Integration in a maven build</a></li>
 <li><a href="#integration-in-a-gradle-build">Integration in a gradle build</a></li>
-<li><a href="#asciidoctorj-version">Asciidoctorj version</a></li>
+<li><a href="#which-version-should-i-use">Which version should I use?</a></li>
 </ul>
 </li>
 <li><a href="#source-code">Source Code</a>
@@ -564,7 +564,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="urls">URLs</h2>
+<h2 id="urls"><a class="anchor" href="#urls"></a>URLs</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -597,7 +597,7 @@ Do you want to improve this page? Please <a href="https://github.com/jmini/ascii
 </div>
 </div>
 <div class="sect1">
-<h2 id="usage">Usage</h2>
+<h2 id="usage"><a class="anchor" href="#usage"></a>Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If you want to use the extension in your code, just write <code>git-link&#58;&lt;target&gt;&#91;&lt;arguments&gt;&#93;</code>.
@@ -618,7 +618,7 @@ Do you want to improve this page? Please <a href="https://github.com/jmini/ascii
 </div>
 </div>
 <div class="sect2">
-<h3 id="sec-target">Target argument</h3>
+<h3 id="sec-target"><a class="anchor" href="#sec-target"></a>Target argument</h3>
 <div class="paragraph">
 <p>This mandatory parameter defines the path of the ressource (a file or a directory) inside the git repository.</p>
 </div>
@@ -696,13 +696,13 @@ Example:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="additional-arguments">Additional arguments</h3>
+<h3 id="additional-arguments"><a class="anchor" href="#additional-arguments"></a>Additional arguments</h3>
 <div class="paragraph">
 <p>The additional arguments are optional.
 You can use the named form (as in <a href="#lst-all">Listing 1</a>) or use them in the correct order.</p>
 </div>
 <div class="sect3">
-<h4 id="link-text">Link text</h4>
+<h4 id="link-text"><a class="anchor" href="#link-text"></a>Link text</h4>
 <div class="paragraph">
 <p>The <code>link-text</code> argument defines the text of the link. Default value is:</p>
 </div>
@@ -718,7 +718,7 @@ You can use the named form (as in <a href="#lst-all">Listing 1</a>) or use them 
 </div>
 </div>
 <div class="sect3">
-<h4 id="mode">Mode</h4>
+<h4 id="mode"><a class="anchor" href="#mode"></a>Mode</h4>
 <div class="paragraph">
 <p>The mode can be:</p>
 </div>
@@ -743,7 +743,7 @@ You can use the named form (as in <a href="#lst-all">Listing 1</a>) or use them 
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec-branch">Branch</h4>
+<h4 id="sec-branch"><a class="anchor" href="#sec-branch"></a>Branch</h4>
 <div class="paragraph">
 <p>The <code>branch</code> argument corresponds to the git branch that should be used.
 If nothing is specified the default value <code>master</code> will be used.</p>
@@ -753,7 +753,7 @@ If nothing is specified the default value <code>master</code> will be used.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec-repository">Repository</h4>
+<h4 id="sec-repository"><a class="anchor" href="#sec-repository"></a>Repository</h4>
 <div class="paragraph">
 <p>The <code>repository</code> agurment specifies the repository on GitHub (pattern: <code>&lt;owner&gt;/&lt;repository-name&gt;</code>).
 Depending on the case <code>&lt;owner&gt;</code> might be a GitHub user name or a GitHub organization name.
@@ -764,7 +764,7 @@ For the repository of this project it would be <code>jmini/asciidoctorj-git-link
 </div>
 </div>
 <div class="sect3">
-<h4 id="link-window">Link window</h4>
+<h4 id="link-window"><a class="anchor" href="#link-window"></a>Link window</h4>
 <div class="paragraph">
 <p>The <code>link-window</code> argument defines where the the link will be openend.
 This is similar to the <code>window</code> attribute of the <code>link</code> macro.</p>
@@ -774,7 +774,7 @@ This is similar to the <code>window</code> attribute of the <code>link</code> ma
 </div>
 </div>
 <div class="sect3">
-<h4 id="sec-server">Server</h4>
+<h4 id="sec-server"><a class="anchor" href="#sec-server"></a>Server</h4>
 <div class="paragraph">
 <p>The <code>server</code> argument is useful if you use your own Git Repository manager (the URL syntax needs to be compatible with GitHub. This is the case with GitLab).
 Possible values are:</p>
@@ -804,7 +804,7 @@ Possible values are:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="additional-examples">Additional examples</h3>
+<h3 id="additional-examples"><a class="anchor" href="#additional-examples"></a>Additional examples</h3>
 <div class="paragraph">
 <p><a href="#lst-empty">Listing 2</a> demonstrates how you can use the macro without any arguments.
 Please notice that in this case the argument <a href="#sec-repository">repository</a> (and optionally <a href="#sec-branch">branch</a> and <a href="#sec-server">server</a>) should be defined at document level.</p>
@@ -864,23 +864,12 @@ You can also change the link text:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="integration-in-a-maven-build">Integration in a maven build</h3>
+<h3 id="integration-in-a-maven-build"><a class="anchor" href="#integration-in-a-maven-build"></a>Integration in a maven build</h3>
 <div class="paragraph">
-<p>The extension is not published on maven central.
-You need to add an additional repository to your pom:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;pluginRepositories&gt;</span>
-  <span class="tag">&lt;pluginRepository&gt;</span>
-    <span class="tag">&lt;id&gt;</span>bintray.jmini.maven<span class="tag">&lt;/id&gt;</span>
-    <span class="tag">&lt;url&gt;</span>http://dl.bintray.com/jmini/maven/<span class="tag">&lt;/url&gt;</span>
-  <span class="tag">&lt;/pluginRepository&gt;</span>
-<span class="tag">&lt;/pluginRepositories&gt;</span></code></pre>
-</div>
+<p>The extension is published on maven central.</p>
 </div>
 <div class="paragraph">
-<p>Then you need to declare <code>fr.jmini.asciidoctorj:git-link</code> as a dependency for the <code>org.asciidoctor:asciidoctor-maven-plugin</code> plugin.
+<p>You need to declare <code>fr.jmini.asciidoctorj:git-link</code> as a dependency for the <code>org.asciidoctor:asciidoctor-maven-plugin</code> plugin.
 Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 <div class="listingblock">
@@ -907,34 +896,31 @@ Your <code>&lt;build&gt;</code> section could looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/patch-1/usage/maven-example/pom.xml">pom.xml</a></p>
+<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/master/usage/maven-example/pom.xml">pom.xml</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="integration-in-a-gradle-build">Integration in a gradle build</h3>
+<h3 id="integration-in-a-gradle-build"><a class="anchor" href="#integration-in-a-gradle-build"></a>Integration in a gradle build</h3>
 <div class="paragraph">
-<p>The extension is not published on maven central.
-You need to add an additional repository near the dependency in the task:</p>
+<p>The extension is published on maven central.
+It can be consumed as dependency of the <code>asciidoctor</code> task:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="gralde">asciidoctor {
     sourceDir = file('docs')
     outputDir = file('build/generated-docs')
-    attributes \
-        'project-version' : &quot;$version&quot;,
-        'imagesdir': '',
-        'toc': 'left',
-        'icons': 'font',
-        'setanchors': 'true',
-        'idprefix': '',
-        'idseparator': '-',
-        'docinfo1': 'true'
+    attributes = ['project-version'   : &quot;$version&quot;,
+                  'source-highlighter': 'coderay',
+                  'imagesdir'         : '',
+                  'toc'               : 'left',
+                  'icons'             : 'font',
+                  'sectanchors'       : 'true',
+                  'idprefix'          : '',
+                  'idseparator'       : '-',
+                  'docinfo1'          : 'true']
     repositories {
-        maven {
-            url &quot;http://dl.bintray.com/jmini/maven/&quot;
-        }
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         asciidoctor &quot;fr.jmini.asciidoctorj:git-link:3.0.0&quot;
@@ -943,25 +929,39 @@ You need to add an additional repository near the dependency in the task:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/patch-1/usage/gradle-example/build.gradle">build.gradle</a></p>
+<p>For a complete example, see: <a href="https://github.com/jmini/asciidoctorj-git-link/blob/master/usage/gradle-example/build.gradle">build.gradle</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="asciidoctorj-version">Asciidoctorj version</h3>
+<h3 id="which-version-should-i-use"><a class="anchor" href="#which-version-should-i-use"></a>Which version should I use?</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Asciidoctorj version</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">git-link&#58;&#91;&#93; version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>1.5.x</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>3.0.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>1.6.x</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>3.1.0</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>This extension is built and tested with version <code>1.5.7</code> of asciidoctorj.
-See the corresponding line in the <code>dependencies</code> section of the gradle build file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>compile "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"</pre>
-</div>
+<p>The lattest version of this extension is built and tested with version <code>1.6.1</code> of <code>org.asciidoctor:asciidoctorj</code>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="source-code">Source Code</h2>
+<h2 id="source-code"><a class="anchor" href="#source-code"></a>Source Code</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>As for any grade plugin, the source code of the plugin is available in the <a href="https://github.com/jmini/asciidoctorj-git-link/tree/patch-1/src">src/</a> folder.</p>
@@ -970,9 +970,12 @@ See the corresponding line in the <code>dependencies</code> section of the gradl
 <p>If you are using the Eclipse Installer (Oomph) you can use the <code>AsciidoctorjGitLink.setup</code> File (<a href="https://raw.githubusercontent.com/jmini/asciidoctorj-git-link/master/AsciidoctorjGitLink.setup">url</a>) to setup your IDE properly.</p>
 </div>
 <div class="sect2">
-<h3 id="build">Build</h3>
+<h3 id="build"><a class="anchor" href="#build"></a>Build</h3>
 <div class="paragraph">
-<p>Run gradle at the root of the repository:</p>
+<p>This project is using gradle.</p>
+</div>
+<div class="paragraph">
+<p>Command to build the sources locally:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -980,7 +983,7 @@ See the corresponding line in the <code>dependencies</code> section of the gradl
 </div>
 </div>
 <div class="paragraph">
-<p>Deploy to local maven repository:</p>
+<p>Command to deploy to your local maven repository:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -988,7 +991,7 @@ See the corresponding line in the <code>dependencies</code> section of the gradl
 </div>
 </div>
 <div class="paragraph">
-<p>Build the documentation page:</p>
+<p>Command to build the documentation page:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -996,7 +999,24 @@ See the corresponding line in the <code>dependencies</code> section of the gradl
 </div>
 </div>
 <div class="paragraph">
-<p>Upload the documentation page on GitHub pages:</p>
+<p>The output of this command is an HTML page located at <code>&lt;git repo root&gt;/build/docs/html5/index.html</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="for-project-maintainers"><a class="anchor" href="#for-project-maintainers"></a>For project maintainers</h4>
+<div class="paragraph">
+<p><code>signing.gnupg.keyName</code> and <code>signing.gnupg.passphrase</code> are expected to be set in your local <code>gradle.properties</code> file to be able to sign.
+<code>sonatypeUser</code> and <code>sonatypePassword</code> are expected to be set in order to be able to publish to a distant repository.</p>
+</div>
+<div class="paragraph">
+<p>Command to build and publish the result in a distant maven repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./gradlew publish</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Command to upload the documentation page on GitHub pages:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1004,15 +1024,16 @@ See the corresponding line in the <code>dependencies</code> section of the gradl
 </div>
 </div>
 <div class="paragraph">
-<p>Perform a release:</p>
+<p>Command to perform a release:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>./gradlew release -Prelease.useAutomaticVersion=true</pre>
 </div>
 </div>
+</div>
 <div class="sect3">
-<h4 id="using-ssh-agent">Using ssh-agent</h4>
+<h4 id="using-ssh-agent"><a class="anchor" href="#using-ssh-agent"></a>Using ssh-agent</h4>
 <div class="paragraph">
 <p>Some tasks requires to push into the distant git repository (release task or updating the <code>gh-pages</code> branch).
 If they are failing with errors like this:</p>
@@ -1039,7 +1060,7 @@ ssh-add ~/.ssh/id_rsa</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="get-in-touch">Get in touch</h2>
+<h2 id="get-in-touch"><a class="anchor" href="#get-in-touch"></a>Get in touch</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Use the <a href="https://github.com/jmini/asciidoctorj-git-link/issues">git-link&#58;&#91;&#93; issue tracker</a> on GitHub.</p>
@@ -1050,7 +1071,7 @@ ssh-add ~/.ssh/id_rsa</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="license">License</h2>
+<h2 id="license"><a class="anchor" href="#license"></a>License</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></p>
@@ -1060,8 +1081,8 @@ ssh-add ~/.ssh/id_rsa</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.0.0<br>
-Last updated 2018-11-28 23:14:30 +0100
+Version 3.1.0<br>
+Last updated 2019-02-16 17:48:17 +0100
 </div>
 </div>
 </body>
