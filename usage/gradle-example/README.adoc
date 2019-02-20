@@ -1,12 +1,12 @@
 = Gradle example
 
 This example describes how to use `git-link&#58;&#91;&#93;` in a gradle build.
+The extension is published on maven central and can be downloaded during the build.
 
 //tag::gradle-integration[]
 == Integration in a gradle build
 
-The extension is published on maven central.
-It can be consumed as dependency of the `asciidoctor` task:
+The `fr.jmini.asciidoctorj:git-link` jar can be declared as dependency of the `asciidoctor` task:
 
 [source,gralde]
 ----

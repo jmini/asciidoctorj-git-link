@@ -21,7 +21,7 @@ include::{github-readme}[tags=header]
 
 TIP: Do you want to improve this page? Please git-link:self[edit it on GitHub, edit].
 
-== Usage
+== Description
 
 If you want to use the extension in your code, just write `git-link&#58;<target>&#91;<arguments>&#93;`.
 <<lst-all>> provides a complete example, that creates a link to edit a file on a GitHub repo:
@@ -190,6 +190,10 @@ include::{srcdir}test/resources/test_with_link_text.adoc[]
 ====
 include::{srcdir}test/resources/test_with_link_text.adoc[]
 ====
+
+== Usage
+
+The extension is published on maven central and can be directly consumed from maven or gradle.
 
 include::{rootdir}/usage/maven-example/README.adoc[leveloffset=1, tags=maven-integration]
 

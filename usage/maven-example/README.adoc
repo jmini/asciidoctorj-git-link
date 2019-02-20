@@ -1,11 +1,10 @@
 = Maven example
 
 This example describes how to use `git-link&#58;&#91;&#93;` in a maven build.
+The extension is published on maven central and can be downloaded during the build.
 
 //tag::maven-integration[]
 == Integration in a maven build
-
-The extension is published on maven central.
 
 You need to declare `fr.jmini.asciidoctorj:git-link` as a dependency for the `org.asciidoctor:asciidoctor-maven-plugin` plugin.
 Your `<build>` section could looks like this:

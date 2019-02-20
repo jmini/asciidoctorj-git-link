@@ -141,6 +141,7 @@ asciidoctor {
                   'imagesdir'           : '',
                   'toc'                 : 'left',
                   'icons'               : 'font',
+                  'toclevels'           : '3',
                   'sectanchors'         : 'true',
                   'idprefix'            : '',
                   'idseparator'         : '-',
