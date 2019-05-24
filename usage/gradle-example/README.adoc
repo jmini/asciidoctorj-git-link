@@ -12,5 +12,6 @@ The `fr.jmini.asciidoctorj:git-link` jar can be declared as dependency of the `a
 ----
 include::build.gradle[tags=task,indent=0]
 ----
+<1> Dependency declaration
 
 //end::gradle-integration[]

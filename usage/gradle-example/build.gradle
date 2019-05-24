@@ -1,5 +1,5 @@
 plugins {
-    id 'org.asciidoctor.convert' version '1.5.9.1'
+    id 'org.asciidoctor.convert' version '2.2.0'
 }
 
 wrapper {
@@ -10,7 +10,7 @@ group = 'fr.jmini.example'
 version = '1.0.0-SNAPSHOT'
 
 asciidoctorj {
-    version = '1.6.1'
+    version = '2.0.0'
 }
 
 // tag::task[]
@@ -27,10 +27,11 @@ asciidoctor {
                   'idseparator'       : '-',
                   'docinfo1'          : 'true']
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
-        asciidoctor "fr.jmini.asciidoctorj:git-link:3.1.0"
+        asciidoctor'fr.jmini.asciidoctorj:git-link:3.2.0' // <1>
     }
 }
 // end::task[]

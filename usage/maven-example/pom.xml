@@ -5,9 +5,9 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <asciidoctorj.version>1.6.1</asciidoctorj.version>
-    <jruby.version>9.1.17.0</jruby.version>
-    <asciidoctor.maven.plugin.version>1.5.7.1</asciidoctor.maven.plugin.version>
+    <asciidoctorj.version>2.0.0</asciidoctorj.version>
+    <jruby.version>9.2.7.0</jruby.version>
+    <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 <!-- tag::mvn-plugin[] -->
@@ -21,10 +21,10 @@
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <version>${asciidoctor.maven.plugin.version}</version>
         <dependencies>
-          <dependency>
+          <dependency> <!--1-->
             <groupId>fr.jmini.asciidoctorj</groupId>
             <artifactId>git-link</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.0</version>
           </dependency>
           <!-- ... (other dependencies) -->
 <!-- end::mvn-plugin[] -->

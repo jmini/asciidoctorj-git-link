@@ -13,5 +13,6 @@ Your `<build>` section could looks like this:
 ----
 include::pom.xml[tags=mvn-plugin,indent=0]
 ----
+<1> Dependency declaration
 
 //end::maven-integration[]
