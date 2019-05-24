@@ -1,2 +1,0 @@
-# File: src/main/resources/META-INF/services/org.asciidoctor.extension.spi.ExtensionRegistry
-fr.jmini.asciidoctorj.gitlink.GitLinkMacroExtension

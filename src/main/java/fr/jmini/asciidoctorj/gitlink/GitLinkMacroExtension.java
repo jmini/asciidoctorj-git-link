@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.extension.JavaExtensionRegistry;
-import org.asciidoctor.extension.spi.ExtensionRegistry;
+import org.asciidoctor.jruby.extension.spi.ExtensionRegistry;
 
 public class GitLinkMacroExtension implements ExtensionRegistry {
 

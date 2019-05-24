@@ -7,7 +7,6 @@
 
 include::{github-readme}[tags=vardef]
 
-:bintraypage: https://bintray.com/jmini/maven/asciidoctorj-git-link
 :projectpage: https://github.com/{gh-repo-owner}/{gh-repo-name}
 
 include::{github-readme}[tags=header]
@@ -16,7 +15,6 @@ include::{github-readme}[tags=header]
 
 * link:{homepage}[Project home] (this page)
 * link:{projectpage}[GitHub project]
-* link:{bintraypage}[Binaries on Bintray]
 * link:{issues}[Issue tracker]
 
 TIP: Do you want to improve this page? Please git-link:self[edit it on GitHub, edit].
@@ -210,13 +208,14 @@ For a complete example, see: git-link:usage/gradle-example/build.gradle[build.gr
 | Asciidoctorj version | git-link&#58;&#91;&#93; version
 | `1.5.x` | `3.0.0`
 | `1.6.x` | `3.1.0`
+| `2.0.x` | `3.2.0`
 |===
 
-The lattest version of this extension is built and tested with version `{asciidoctorj-version}` of `org.asciidoctor:asciidoctorj`.
+The latest version of this extension is built and tested with version `{asciidoctorj-version}` of `org.asciidoctor:asciidoctorj`.
 
 == Source Code
 
-As for any grade plugin, the source code of the plugin is available in the git-link:src/[src/] folder.
+As for any java project, the source code of the plugin is available in the git-link:src/[src/] folder.
 
 If you are using the Eclipse Installer (Oomph) you can use the `{oomph-file}` File (link:{setup}[url]) to setup your IDE properly.
 
@@ -249,10 +248,10 @@ The output of this command is an HTML page located at `<git repo root>/build/doc
 `signing.gnupg.keyName` and `signing.gnupg.passphrase` are expected to be set in your local `gradle.properties` file to be able to sign.
 `sonatypeUser` and `sonatypePassword` are expected to be set in order to be able to publish to a distant repository.
 					
-Command to build and publish the result in a distant maven repository:
+Command to build and publish the result to maven central:
 
 ----
-./gradlew publish
+./gradlew publishToNexus
 ----
 
 Command to upload the documentation page on GitHub pages:

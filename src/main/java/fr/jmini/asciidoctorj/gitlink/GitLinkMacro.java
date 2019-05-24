@@ -60,8 +60,7 @@ public class GitLinkMacro extends InlineMacroProcessor {
       // Create the 'anchor' node:
       PhraseNode inline = createPhraseNode(parent, "anchor", link.getText(), attributes, options);
 
-      // Convert to String value:
-      return inline.convert();
+      return inline;
     }
   }
 
