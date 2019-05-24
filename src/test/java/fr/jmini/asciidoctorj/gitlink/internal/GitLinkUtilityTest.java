@@ -10,12 +10,9 @@
  ******************************************************************************/
 package fr.jmini.asciidoctorj.gitlink.internal;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-
-import fr.jmini.asciidoctorj.gitlink.internal.GitLink;
-import fr.jmini.asciidoctorj.gitlink.internal.GitLinkUtility;
+import org.junit.jupiter.api.Test;
 
 public class GitLinkUtilityTest {
 
@@ -30,21 +27,21 @@ public class GitLinkUtilityTest {
 
   @Test
   public void testComputeFilepath() throws Exception {
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath(FILE, "some-repo"));
-    assertEquals("/folder/TEXT.adoc", GitLinkUtility.computeFilePath(SUB_FILE, "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("some-repo/my_file.txt", "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("xxx/some-repo/yyyy/some-repo/my_file.txt", "some-repo"));
-    assertEquals("/file.txt", GitLinkUtility.computeFilePath("xxx/myproject_repo/file.txt", "myproject"));
-    assertEquals("/file.txt", GitLinkUtility.computeFilePath("/myproject_repo/file.txt", "myproject"));
-    assertEquals("/some/folder/file.txt", GitLinkUtility.computeFilePath("xxx/myproject.git/some/folder/file.txt", "myproject"));
+    assertThat(GitLinkUtility.computeFilePath(FILE, "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath(SUB_FILE, "some-repo")).isEqualTo("/folder/TEXT.adoc");
+    assertThat(GitLinkUtility.computeFilePath("some-repo/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/some-repo/yyyy/some-repo/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/myproject_repo/file.txt", "myproject")).isEqualTo("/file.txt");
+    assertThat(GitLinkUtility.computeFilePath("/myproject_repo/file.txt", "myproject")).isEqualTo("/file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/myproject.git/some/folder/file.txt", "myproject")).isEqualTo("/some/folder/file.txt");
 
     //Handle the special case "target/checkout"
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("xxx/some-repo/target/checkout/my_file.txt", "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("xxx/some-repo/proj/target/checkout/my_file.txt", "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("xxx/target/checkout/my_file.txt", "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("target/checkout/my_file.txt", "some-repo"));
-    assertEquals("/some/folder/file.txt", GitLinkUtility.computeFilePath("xxx/some-repo/target/checkout/some/folder/file.txt", "some-repo"));
-    assertEquals("/my_file.txt", GitLinkUtility.computeFilePath("xxx\\some-repo\\target\\checkout\\my_file.txt", "some-repo"));
+    assertThat(GitLinkUtility.computeFilePath("xxx/some-repo/target/checkout/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/some-repo/proj/target/checkout/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/target/checkout/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("target/checkout/my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx/some-repo/target/checkout/some/folder/file.txt", "some-repo")).isEqualTo("/some/folder/file.txt");
+    assertThat(GitLinkUtility.computeFilePath("xxx\\some-repo\\target\\checkout\\my_file.txt", "some-repo")).isEqualTo("/my_file.txt");
   }
 
   @Test
@@ -204,9 +201,8 @@ public class GitLinkUtilityTest {
   }
 
   private static void assertLinkEqual(String url, String text, String warning, GitLink actual) {
-    assertEquals("url", url, actual.getUrl());
-    assertEquals("text", text, actual.getText());
-    assertEquals("warning", warning, actual.getWarning());
+    assertThat(actual.getUrl()).describedAs("url").isEqualTo(url);
+    assertThat(actual.getText()).describedAs("text").isEqualTo(text);
+    assertThat(actual.getWarning()).describedAs("warning").isEqualTo(warning);
   }
-
 }

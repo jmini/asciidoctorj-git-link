@@ -48,11 +48,17 @@ tasks.withType(Sign) {
     }
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"
 
-    testCompile "junit:junit:4.8"
-    testCompile "org.hamcrest:hamcrest-core:1.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 publishing {

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package fr.jmini.asciidoctorj.gitlink;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Asciidoctor.Factory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GitLinkTest {
 
@@ -81,6 +81,6 @@ public class GitLinkTest {
     options.put("attributes", attributes);
     String html = asciidoctor.convert(content, options);
 
-    assertEquals(expected, html);
+    assertThat(html).isEqualTo(expected);
   }
 }
