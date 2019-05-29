@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.asciidoctor.ast.ContentNode;
-import org.asciidoctor.ast.PhraseNode;
 import org.asciidoctor.extension.InlineMacroProcessor;
 
 import fr.jmini.asciidoctorj.gitlink.internal.GitLink;
@@ -44,11 +43,11 @@ public class GitLinkMacro extends InlineMacroProcessor {
     }
 
     if (link.getUrl() == null) {
-      return link.getText();
+      return createPhraseNode(parent, "quoted", link.getText(), attributes, new HashMap<>());
     }
     else {
       // Define options for an 'anchor' element:
-      Map<String, Object> options = new HashMap<String, Object>();
+      Map<String, Object> options = new HashMap<>();
       options.put("type", ":link");
       options.put("target", link.getUrl());
 
@@ -58,9 +57,7 @@ public class GitLinkMacro extends InlineMacroProcessor {
       }
 
       // Create the 'anchor' node:
-      PhraseNode inline = createPhraseNode(parent, "anchor", link.getText(), attributes, options);
-
-      return inline;
+      return createPhraseNode(parent, "anchor", link.getText(), attributes, options);
     }
   }
 
