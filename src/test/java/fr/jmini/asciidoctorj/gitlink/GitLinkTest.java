@@ -23,6 +23,7 @@ import java.util.List;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.log.LogRecord;
+import org.asciidoctor.log.Severity;
 import org.junit.jupiter.api.Test;
 
 public class GitLinkTest {
@@ -36,13 +37,19 @@ public class GitLinkTest {
   @Test
   public void testEmpty() throws Exception {
     List<LogRecord> logs = runTest("test_empty");
-    assertThat(logs).isEmpty();
+    assertThat(logs).hasSize(1);
+    LogRecord log = logs.get(0);
+    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
+    assertThat(log.getMessage()).isEqualTo("git-link: The mode is unexpected, using 'edit' as fallback.");
   }
 
   @Test
   public void testEmpty2() throws Exception {
     List<LogRecord> logs = runTest("test_empty2");
-    assertThat(logs).isEmpty();
+    assertThat(logs).hasSize(1);
+    LogRecord log = logs.get(0);
+    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
+    assertThat(log.getMessage()).isEqualTo("git-link: The mode is unexpected, using 'edit' as fallback.");
   }
 
   @Test
@@ -54,7 +61,10 @@ public class GitLinkTest {
   @Test
   public void testRepositoryMissing() throws Exception {
     List<LogRecord> logs = runTest("test_repository_missing");
-    assertThat(logs).isEmpty();
+    assertThat(logs).hasSize(1);
+    LogRecord log = logs.get(0);
+    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
+    assertThat(log.getMessage()).isEqualTo("git-link: There is no repository set.");
   }
 
   @Test

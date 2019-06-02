@@ -15,6 +15,8 @@ import java.util.Map;
 
 import org.asciidoctor.ast.ContentNode;
 import org.asciidoctor.extension.InlineMacroProcessor;
+import org.asciidoctor.log.LogRecord;
+import org.asciidoctor.log.Severity;
 
 import fr.jmini.asciidoctorj.gitlink.internal.GitLink;
 import fr.jmini.asciidoctorj.gitlink.internal.GitLinkUtility;
@@ -39,7 +41,7 @@ public class GitLinkMacro extends InlineMacroProcessor {
     GitLink link = GitLinkUtility.compute(path, mode, server, repository, branch, linkText, docFile);
 
     if (link.getWarning() != null) {
-      //TODO: log a warning containing link.getWarning()
+      log(new LogRecord(Severity.WARN, link.getWarning()));
     }
 
     if (link.getUrl() == null) {
