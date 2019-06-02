@@ -31,7 +31,7 @@ asciidoctor {
         mavenCentral()
     }
     dependencies {
-        asciidoctor'fr.jmini.asciidoctorj:git-link:3.2.0' // <1>
+        asciidoctor'fr.jmini.asciidoctorj:git-link:3.2.1' // <1>
     }
 }
 // end::task[]

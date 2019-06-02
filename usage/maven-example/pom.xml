@@ -24,7 +24,7 @@
           <dependency> <!--1-->
             <groupId>fr.jmini.asciidoctorj</groupId>
             <artifactId>git-link</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
           </dependency>
           <!-- ... (other dependencies) -->
 <!-- end::mvn-plugin[] -->
