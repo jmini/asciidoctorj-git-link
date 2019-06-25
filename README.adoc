@@ -23,6 +23,8 @@ Jeremie Bresson
 Asciidoctorj extension to create links to view or edit files on a git server (like github.com).
 //end::header[]
 
+image:https://circleci.com/gh/{gh-repo-owner}/{gh-repo-name}.svg?style=svg["CircleCI", link="https://circleci.com/gh/{gh-repo-owner}/{gh-repo-name}"]
+
 == Project Homepage
 
 Visit the link:{homepage}[project home page] to know more about:
