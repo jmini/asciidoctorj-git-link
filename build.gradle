@@ -31,15 +31,9 @@ task javadocJar(type: Jar) {
     classifier = 'javadoc'
 }
 
-artifacts {
-    archives jar
-    archives sourcesJar
-    archives javadocJar
-}
-
 signing {
     useGpgCmd()
-    sign configurations.archives
+    sign(publishing.publications)
 }
 
 tasks.withType(Sign) {
@@ -91,31 +85,6 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-
-            if(project.hasProperty('signing.gnupg.keyName')) {
-                pom.withXml {
-                    def pomFile = file("${project.buildDir}/generated-pom.xml")
-                    writeTo(pomFile)
-                    def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                    artifact(pomAscFile) {
-                        classifier = null
-                        extension = 'pom.asc'
-                    }
-                    pomFile.delete()
-                }
-    
-                project.tasks.signArchives.signatureFiles.each {
-                    artifact(it) {
-                        def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
-                        if (matcher.find()) {
-                            classifier = matcher.group(1)
-                        } else {
-                            classifier = null
-                        }
-                        extension = 'jar.asc'
-                    }
-                }
-            }
         }
     }
 }
@@ -124,15 +93,6 @@ nexusPublishing {
     packageGroup = 'fr.jmini'
     username = project.findProperty('sonatypeUser') ?: ''
     password = project.findProperty('sonatypePassword') ?: ''
-}
-
-model {
-    tasks.publishMavenJavaPublicationToMavenLocal {
-        dependsOn(project.tasks.signArchives)
-    }
-    tasks.publishMavenJavaPublicationToNexusRepository {
-        dependsOn(project.tasks.signArchives)
-    }
 }
 
 def buildDate() {
