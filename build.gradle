@@ -4,6 +4,7 @@ plugins {
     id 'signing'
     id 'org.asciidoctor.convert' version '2.4.0'
     id 'org.ajoberstar.git-publish' version '2.0.0'
+    id 'com.diffplug.gradle.spotless' version '3.27.1'
     id 'net.researchgate.release' version '2.6.0'
     id "de.marcphilipp.nexus-publish" version '0.2.0'
 }
@@ -137,6 +138,16 @@ gitPublish {
     }
 
     commitMessage = "Update the 'gh-pages' branch."
+}
+
+spotless {
+  java {
+    importOrder 'java', 'javax', 'org', 'com', ''
+    removeUnusedImports()
+
+    // available versions are: https://github.com/diffplug/spotless/tree/master/lib-extra/src/main/resources/com/diffplug/spotless/extra/eclipse_jdt_formatter
+    eclipse('4.13.0').configFile('.settings/org.eclipse.jdt.core.prefs')
+  }
 }
 
 release {
