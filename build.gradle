@@ -1,10 +1,19 @@
+buildscript {
+  configurations.classpath {
+    resolutionStrategy {
+      //This is required by 'git-publish' version '3.0.0':
+      force 'org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r'
+    }
+  }
+}
+
 plugins {
     id 'java'
     id 'maven-publish'
     id 'signing'
     id 'org.asciidoctor.convert' version '2.4.0'
     id 'org.ajoberstar.git-publish' version '3.0.0'
-    id 'com.diffplug.gradle.spotless' version '3.27.1'
+    id 'com.diffplug.spotless' version '5.1.1'
     id 'net.researchgate.release' version '2.6.0'
     id "de.marcphilipp.nexus-publish" version '0.2.0'
 }
