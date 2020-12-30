@@ -11,7 +11,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'signing'
-    id 'org.asciidoctor.convert' version '2.4.0'
+    id 'org.asciidoctor.jvm.convert' version '3.3.0'
     id 'org.ajoberstar.git-publish' version '3.0.0'
     id 'com.diffplug.spotless' version '5.1.1'
     id 'net.researchgate.release' version '2.6.0'
@@ -109,13 +109,19 @@ def buildDate() {
     return new Date().format('yyyy-MM-dd')
 }
 
+configurations {
+    asciidoctorExtensions
+}
+
 asciidoctorj {
     version = "$asciidoctorjVersion"
 }
 
 asciidoctor {
+    configurations 'asciidoctorExtensions'
     sourceDir = file('src/docs/asciidoc')
-    outputDir = file('build/docs')
+    baseDirFollowsSourceFile()
+    outputDir = file('build/docs/html5')
     attributes = ['revdate'             : "${buildDate()}",
                   'project-version'     : "$version",
                   'asciidoctorj-version': "$asciidoctorjVersion",
@@ -129,7 +135,7 @@ asciidoctor {
                   'idseparator'         : '-',
                   'docinfo1'            : 'true']
     dependencies {
-        asciidoctor project(':')
+        asciidoctorExtensions project(':')
     }
 }
 
