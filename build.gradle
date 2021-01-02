@@ -24,8 +24,11 @@ wrapper {
 
 group = 'fr.jmini.asciidoctorj'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
 
 repositories {
     jcenter()
