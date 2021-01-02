@@ -15,7 +15,8 @@ plugins {
     id 'org.ajoberstar.git-publish' version '3.0.0'
     id 'com.diffplug.spotless' version '5.1.1'
     id 'net.researchgate.release' version '2.6.0'
-    id "de.marcphilipp.nexus-publish" version '0.2.0'
+    id 'de.marcphilipp.nexus-publish' version '0.4.0'
+    id 'io.codearte.nexus-staging' version '0.22.0'
 }
 
 wrapper {
@@ -103,6 +104,15 @@ publishing {
 }
 
 nexusPublishing {
+    repositories {
+        sonatype {
+            username = project.findProperty('sonatypeUser') ?: ''
+            password = project.findProperty('sonatypePassword') ?: ''
+        }
+    }
+}
+
+nexusStaging {
     packageGroup = 'fr.jmini'
     username = project.findProperty('sonatypeUser') ?: ''
     password = project.findProperty('sonatypePassword') ?: ''
@@ -174,7 +184,7 @@ release {
 
 task doRelease {
     dependsOn(
-        'publishToNexus',
+        'publishToSonatype',
         'asciidoctor',
         'gitPublishPush'
     )
