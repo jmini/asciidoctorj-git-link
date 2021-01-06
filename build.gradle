@@ -137,6 +137,7 @@ asciidoctor {
     outputDir = file('build/docs/html5')
     attributes = ['revdate'             : "${buildDate()}",
                   'project-version'     : "$version",
+                  'last-stable-version' : "$lastVersion",
                   'asciidoctorj-version': "$asciidoctorjVersion",
                   'source-highlighter'  : 'coderay',
                   'imagesdir'           : '',

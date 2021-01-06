@@ -213,6 +213,20 @@ For a complete example, see: git-link:usage/gradle-example/build.gradle[build.gr
 
 The latest version of this extension is built and tested with version `{asciidoctorj-version}` of `org.asciidoctor:asciidoctorj`.
 
+== Download
+
+The library is hosted on maven central.
+
+[source, xml, subs="verbatim,attributes"]
+.Maven coordinates of the library
+----
+<dependency>
+  <groupId>fr.jmini.asciidoctorj</groupId>
+  <artifactId>git-link</artifactId>
+  <version>{last-stable-version}</version>
+</dependency>
+----
+
 == Source Code
 
 As for any java project, the source code of the plugin is available in the git-link:src/[src/] folder.
