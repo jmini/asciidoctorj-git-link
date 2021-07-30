@@ -47,162 +47,166 @@ public class GitLinkUtilityTest {
   @Test
   public void testNullRepository() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, null, null, null, FILE);
-    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, link);
+    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, null, link);
   }
 
   @Test
   public void testNullRepositoryWithText() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, null, null, CUSTOM_LINK_TEXT, FILE);
-    assertLinkEqual(null, CUSTOM_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, link);
+    assertLinkEqual(null, CUSTOM_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, null, link);
   }
 
   @Test
   public void testEmptyRepository() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, "", null, null, FILE);
-    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, link);
+    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_NO_REPOSITORY_SET, null, link);
   }
 
   @Test
   public void testFileUnknownFileAndPath() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, REPO, null, null, null);
-    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_FILE_UNKNWON, link);
+    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_FILE_UNKNWON, null, link);
   }
 
   @Test
   public void testWrongRepository() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, "xxx", null, null, FILE);
-    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_REPOSITORY + "xxx", link);
+    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_REPOSITORY + "xxx", null, link);
   }
 
   @Test
   public void testWrongRepository2() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, "zzz/", null, null, FILE);
-    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_REPOSITORY + "zzz/", link);
+    assertLinkEqual(null, DEFAULT_EDIT_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_REPOSITORY + "zzz/", null, link);
   }
 
   @Test
   public void testOkDefaultEdit() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkDefaultView() {
     GitLink link = GitLinkUtility.compute(null, "view", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testNullMode() {
     GitLink link = GitLinkUtility.compute(null, null, null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_MODE, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, GitLinkUtility.DEBUG_UNDEFINED_MODE, link);
   }
 
   @Test
   public void testWrongMode() {
     GitLink link = GitLinkUtility.compute(null, "xxx", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, GitLinkUtility.WARN_UNEXPECTED_MODE, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, "git-link: The mode 'xxx' is unexpected, using 'view' as fallback.", null, link);
+
+    GitLink link2 = GitLinkUtility.compute(null, "abc", null, REPO, null, null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, "git-link: The mode 'abc' is unexpected, using 'view' as fallback.", null, link2);
   }
 
   @Test
   public void testOkWithPath1() {
     GitLink link = GitLinkUtility.compute("path/to/this/File.adoc", "edit", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.adoc", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.adoc", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkWithPath2() {
     GitLink link = GitLinkUtility.compute("/path/to/this/File.txt", "edit", null, REPO, null, null, SUB_FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkWithPathUnknownFile() {
     GitLink link = GitLinkUtility.compute("/path/to/this/File.txt", "edit", null, REPO, null, null, null);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/path/to/this/File.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkDefaultForSubFile() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, REPO, null, null, SUB_FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/folder/TEXT.adoc", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/folder/TEXT.adoc", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkCustomBranch() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, REPO, "features/preview", null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/features/preview/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/features/preview/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkCustomText() {
     GitLink link = GitLinkUtility.compute(null, "edit", null, REPO, null, CUSTOM_LINK_TEXT, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", CUSTOM_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/edit/master/my_file.txt", CUSTOM_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkViewDir() {
     GitLink link = GitLinkUtility.compute("some/folder", "viewdir", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkViewDirTrailingSlash() {
     GitLink link = GitLinkUtility.compute("some/folder/", "viewdir", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkViewDirStartWithDot() {
     GitLink link = GitLinkUtility.compute("./some/folder", "viewdir", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkViewDirDotSlash() {
     GitLink link = GitLinkUtility.compute("./", "viewdir", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkViewDirDotSlashOtherBranch() {
     GitLink link = GitLinkUtility.compute("./", "viewdir", null, REPO, "gh-pages", null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/gh-pages", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/gh-pages", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testEditButShouldBeViewDir() {
     GitLink link = GitLinkUtility.compute("some/folder/", "edit", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testViewButShouldBeViewDir() {
     GitLink link = GitLinkUtility.compute("some/folder/", "view", null, REPO, null, null, FILE);
-    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://github.com/jmini/some-repo/tree/master/some/folder", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkOtherServer() {
     GitLink link = GitLinkUtility.compute(null, "edit", "https://git.server.com", REPO, null, null, FILE);
-    assertLinkEqual("https://git.server.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://git.server.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkOtherServerTrailingSlash() {
     GitLink link = GitLinkUtility.compute(null, "edit", "https://git.server.com/", REPO, null, null, FILE);
-    assertLinkEqual("https://git.server.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, link);
+    assertLinkEqual("https://git.server.com/jmini/some-repo/edit/master/my_file.txt", DEFAULT_EDIT_LINK_TEXT, null, null, link);
   }
 
   @Test
   public void testOkOtherServerOtherBranch() {
     GitLink link = GitLinkUtility.compute(null, "view", "https://server.com/git-manager", REPO, "features/test", null, FILE);
-    assertLinkEqual("https://server.com/git-manager/jmini/some-repo/blob/features/test/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, link);
+    assertLinkEqual("https://server.com/git-manager/jmini/some-repo/blob/features/test/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, null, link);
   }
 
-  private static void assertLinkEqual(String url, String text, String warning, GitLink actual) {
+  private static void assertLinkEqual(String url, String text, String warning, String debug, GitLink actual) {
     assertThat(actual.getUrl()).describedAs("url").isEqualTo(url);
     assertThat(actual.getText()).describedAs("text").isEqualTo(text);
-    assertThat(actual.getWarning()).describedAs("warning").isEqualTo(warning);
+    assertThat(actual.getWarningLogMessage()).describedAs("warning").isEqualTo(warning);
+    assertThat(actual.getDebugLogMessage()).describedAs("debug").isEqualTo(debug);
   }
 }

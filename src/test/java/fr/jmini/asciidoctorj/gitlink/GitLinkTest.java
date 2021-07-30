@@ -39,8 +39,8 @@ public class GitLinkTest {
     List<LogRecord> logs = runTest("test_empty");
     assertThat(logs).hasSize(1);
     LogRecord log = logs.get(0);
-    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
-    assertThat(log.getMessage()).isEqualTo("git-link: The mode is unexpected, using 'edit' as fallback.");
+    assertThat(log.getSeverity()).isEqualTo(Severity.DEBUG);
+    assertThat(log.getMessage()).isEqualTo("git-link: The mode is not defined, using 'view' as fallback.");
   }
 
   @Test
@@ -48,8 +48,8 @@ public class GitLinkTest {
     List<LogRecord> logs = runTest("test_empty2");
     assertThat(logs).hasSize(1);
     LogRecord log = logs.get(0);
-    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
-    assertThat(log.getMessage()).isEqualTo("git-link: The mode is unexpected, using 'edit' as fallback.");
+    assertThat(log.getSeverity()).isEqualTo(Severity.DEBUG);
+    assertThat(log.getMessage()).isEqualTo("git-link: The mode is not defined, using 'view' as fallback.");
   }
 
   @Test
@@ -61,10 +61,13 @@ public class GitLinkTest {
   @Test
   public void testRepositoryMissing() throws Exception {
     List<LogRecord> logs = runTest("test_repository_missing");
-    assertThat(logs).hasSize(1);
-    LogRecord log = logs.get(0);
-    assertThat(log.getSeverity()).isEqualTo(Severity.WARN);
-    assertThat(log.getMessage()).isEqualTo("git-link: There is no repository set.");
+    assertThat(logs).hasSize(2);
+    LogRecord log1 = logs.get(0);
+    assertThat(log1.getSeverity()).isEqualTo(Severity.WARN);
+    assertThat(log1.getMessage()).isEqualTo("git-link: There is no repository set.");
+    LogRecord log2 = logs.get(1);
+    assertThat(log2.getSeverity()).isEqualTo(Severity.DEBUG);
+    assertThat(log2.getMessage()).isEqualTo("git-link: The mode is not defined, using 'view' as fallback.");
   }
 
   @Test

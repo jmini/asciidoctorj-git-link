@@ -40,8 +40,11 @@ public class GitLinkMacro extends InlineMacroProcessor {
 
     GitLink link = GitLinkUtility.compute(path, mode, server, repository, branch, linkText, docFile);
 
-    if (link.getWarning() != null) {
-      log(new LogRecord(Severity.WARN, link.getWarning()));
+    if (link.getWarningLogMessage() != null) {
+      log(new LogRecord(Severity.WARN, link.getWarningLogMessage()));
+    }
+    if (link.getDebugLogMessage() != null) {
+      log(new LogRecord(Severity.DEBUG, link.getDebugLogMessage()));
     }
 
     if (link.getUrl() == null) {

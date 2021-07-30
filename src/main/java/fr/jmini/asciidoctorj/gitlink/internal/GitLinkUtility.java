@@ -15,7 +15,8 @@ public final class GitLinkUtility {
   static final String DEFAULT_EDIT_TEXT = "edit on GitHub";
   static final String DEFAULT_VIEW_TEXT = "view on GitHub";
   static final String DEFAULT_BRANCH = "master";
-  static final String WARN_UNEXPECTED_MODE = "git-link: The mode is unexpected, using 'edit' as fallback.";
+  static final String WARN_UNEXPECTED_MODE = "git-link: The mode '%s' is unexpected, using 'view' as fallback.";
+  static final String DEBUG_UNDEFINED_MODE = "git-link: The mode is not defined, using 'view' as fallback.";
   static final String WARN_NO_REPOSITORY_SET = "git-link: There is no repository set.";
   static final String WARN_FILE_UNKNWON = "git-link: path and asciidoctor docfile are unknown";
   static final String WARN_UNEXPECTED_REPOSITORY = "git-link: unexpected repository, should match the GitHub pattern {user}/{git-repository}, current value: ";
@@ -32,16 +33,17 @@ public final class GitLinkUtility {
     }
     if (mode == null) {
       if (modeInput != null && !modeInput.toString().isEmpty()) {
+        String modeInputAsString = modeInput.toString();
         try {
-          mode = GitLinkMode.valueOf(modeInput.toString().toUpperCase());
+          mode = GitLinkMode.valueOf(modeInputAsString.toUpperCase());
         }
         catch (IllegalArgumentException e) {
-          result.setWarning(WARN_UNEXPECTED_MODE);
+          result.setWarningLogMessage(String.format(WARN_UNEXPECTED_MODE, modeInputAsString));
           mode = GitLinkMode.VIEW;
         }
       }
       else {
-        result.setWarning(WARN_UNEXPECTED_MODE);
+        result.setDebugLogMessage(String.format(DEBUG_UNDEFINED_MODE));
         mode = GitLinkMode.VIEW;
       }
     }
@@ -66,10 +68,10 @@ public final class GitLinkUtility {
 
     //Repository:
     if (repository == null || repository.toString().isEmpty()) {
-      result.setWarning(WARN_NO_REPOSITORY_SET);
+      result.setWarningLogMessage(WARN_NO_REPOSITORY_SET);
     }
     else if ((target == null || "self".equals(target)) && (file == null || file.toString().isEmpty())) {
-      result.setWarning(WARN_FILE_UNKNWON);
+      result.setWarningLogMessage(WARN_FILE_UNKNWON);
     }
     else {
       String repoString = (String) repository;
@@ -84,7 +86,7 @@ public final class GitLinkUtility {
         filePath = computeFilePath(file.toString(), repositoryName);
       }
       else {
-        result.setWarning(WARN_UNEXPECTED_REPOSITORY + repoString);
+        result.setWarningLogMessage(WARN_UNEXPECTED_REPOSITORY + repoString);
       }
 
       if (filePath != null) {
