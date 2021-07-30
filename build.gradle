@@ -32,6 +32,7 @@ java {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -60,8 +61,10 @@ test {
     useJUnitPlatform()
 }
 
+def strictAsciidoctorjVersion = hasProperty('asciidoctorjVersion') ? '!!' + getProperty('asciidoctorjVersion') : ''
+
 dependencies {
-    implementation "org.asciidoctor:asciidoctorj:$asciidoctorjVersion"
+    implementation "org.asciidoctor:asciidoctorj:${asciidoctorjVersion}${strictAsciidoctorjVersion}"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
@@ -106,6 +109,7 @@ publishing {
 nexusPublishing {
     repositories {
         sonatype {
+            packageGroup = 'fr.jmini'
             username = project.findProperty('sonatypeUser') ?: ''
             password = project.findProperty('sonatypePassword') ?: ''
         }
@@ -127,7 +131,7 @@ configurations {
 }
 
 asciidoctorj {
-    version = "$asciidoctorjVersion"
+    version = '2.5.1'
 }
 
 asciidoctor {

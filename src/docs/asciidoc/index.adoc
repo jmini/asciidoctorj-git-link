@@ -201,17 +201,23 @@ include::{rootdir}/usage/gradle-example/README.adoc[leveloffset=1, tags=gradle-i
 
 For a complete example, see: git-link:usage/gradle-example/build.gradle[build.gradle, branch="master"]
 
+== AsciidoctorJ version
+
+This extension is compatible with `org.asciidoctor:asciidoctorj` in range `{asciidoctorj-version}`.
+
+The continuous integration server runs the test suite with different AsciidoctorJ versions within this range.
+
 === Which version should I use?
+
+Older version of this extension are compatible with older version of Asciidoctorj:
 
 [cols="2*^"]
 |===
 | Asciidoctorj version | git-link&#58;&#91;&#93; version
 | `1.5.x` | `3.0.0`
 | `1.6.x` | `3.1.0`
-| `2.0.x` | `3.2.0`
+| `2.x.x` | `3.2.0`
 |===
-
-The latest version of this extension is built and tested with version `{asciidoctorj-version}` of `org.asciidoctor:asciidoctorj`.
 
 == Download
 

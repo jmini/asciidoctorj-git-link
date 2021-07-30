@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  default-asciidoctorj-version:
     docker:
       - image: circleci/openjdk:8-jdk
 
@@ -16,14 +16,27 @@ jobs:
             - gradle-{{ checksum "build.gradle" }}
             - gradle-
 
-      - run: ./gradlew dependencies
+      - run: ./gradlew check
 
       - save_cache:
           paths:
             - ~/.gradle
           key: gradle-{{ checksum "build.gradle" }}
 
-      - run: ./gradlew check
+      - run:
+          name: Ensure no uncommitted changes
+          command: |
+            if [ -n "$(git status --porcelain)" ]; then
+                echo "There are uncommitted changes in working tree after execution of the build"
+                echo "Perform git diff"
+                git --no-pager diff
+                echo "Perform git status"
+                git status
+                echo "Please run the build locally and commit changes"
+                exit 1
+            else
+                echo "Git working tree is clean"
+            fi
 
       - run:
           name: Save test results
@@ -34,6 +47,55 @@ jobs:
 
       - store_test_results:
           path: ~/test-results
+          when: always
 
       - store_artifacts:
           path: ~/test-results/junit
+          when: always
+
+  all-asciidoctorj-versions:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "build.gradle" }}
+            - gradle-
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.5.1
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.5.0
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.4.3
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.4.2
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.4.1
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.4.0
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.3.1
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.3.0
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.2.0
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.1.0
+
+      - run: ./gradlew check -PasciidoctorjVersion=2.0.0
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: gradle-{{ checksum "build.gradle" }}
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - default-asciidoctorj-version
+      - all-asciidoctorj-versions
