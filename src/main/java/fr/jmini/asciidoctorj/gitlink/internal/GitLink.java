@@ -13,7 +13,8 @@ package fr.jmini.asciidoctorj.gitlink.internal;
 public class GitLink {
   private String url;
   private String text;
-  private String warning;
+  private String warningLogMessage;
+  private String debugLogMessage;
 
   public String getUrl() {
     return url;
@@ -31,12 +32,20 @@ public class GitLink {
     this.text = text;
   }
 
-  public String getWarning() {
-    return warning;
+  public String getWarningLogMessage() {
+    return warningLogMessage;
   }
 
-  public void setWarning(String warning) {
-    this.warning = warning;
+  public void setWarningLogMessage(String warning) {
+    this.warningLogMessage = warning;
+  }
+
+  public String getDebugLogMessage() {
+    return debugLogMessage;
+  }
+
+  public void setDebugLogMessage(String debugLogMessage) {
+    this.debugLogMessage = debugLogMessage;
   }
 
 }
