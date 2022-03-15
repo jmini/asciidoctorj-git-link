@@ -65,6 +65,8 @@ jobs:
             - gradle-{{ checksum "build.gradle" }}
             - gradle-
 
+      - run: ./gradlew check -PasciidoctorjVersion=2.5.3
+
       - run: ./gradlew check -PasciidoctorjVersion=2.5.2
 
       - run: ./gradlew check -PasciidoctorjVersion=2.5.1
