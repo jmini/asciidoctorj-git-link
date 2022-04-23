@@ -6,7 +6,7 @@ version: 2
 jobs:
   default-asciidoctorj-version:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:8.0
 
     steps:
       - checkout
@@ -55,7 +55,7 @@ jobs:
 
   all-asciidoctorj-versions:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:8.0
 
     steps:
       - checkout
