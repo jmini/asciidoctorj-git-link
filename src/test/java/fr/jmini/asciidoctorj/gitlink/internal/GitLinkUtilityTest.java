@@ -99,6 +99,12 @@ class GitLinkUtilityTest {
   }
 
   @Test
+  void testBrowseMode() {
+    GitLink link = GitLinkUtility.compute(null, "browse", null, REPO, null, null, FILE);
+    assertLinkEqual("https://github.com/jmini/some-repo/browse/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, null, null, link);
+  }
+
+  @Test
   void testWrongMode() {
     GitLink link = GitLinkUtility.compute(null, "xxx", null, REPO, null, null, FILE);
     assertLinkEqual("https://github.com/jmini/some-repo/blob/master/my_file.txt", DEFAULT_VIEW_LINK_TEXT, "git-link: The mode 'xxx' is unexpected, using 'view' as fallback.", null, link);

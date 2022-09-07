@@ -11,5 +11,5 @@
 package fr.jmini.asciidoctorj.gitlink.internal;
 
 public enum GitLinkMode {
-  EDIT, VIEW, VIEWDIR
+  EDIT, VIEW, VIEWDIR, BROWSE
 }

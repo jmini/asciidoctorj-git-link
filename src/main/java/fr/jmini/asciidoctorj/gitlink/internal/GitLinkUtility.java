@@ -56,6 +56,7 @@ public final class GitLinkUtility {
           break;
         case VIEW:
         case VIEWDIR:
+        case BROWSE:
           result.setText(DEFAULT_VIEW_TEXT);
           break;
         default:
@@ -112,6 +113,9 @@ public final class GitLinkUtility {
             break;
           case VIEWDIR:
             sb.append("tree");
+            break;
+          case BROWSE:
+            sb.append("browse");
             break;
           default:
             throw new IllegalStateException("unexpected mode");

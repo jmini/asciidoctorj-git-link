@@ -1,0 +1,6 @@
+:git-server: https://git.example.com/
+:git-repository: repo
+:git-branch: main
+:git-link-mode: browse
+
+Click on the git-link:src/file.txt[] link.

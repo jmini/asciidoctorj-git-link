@@ -31,7 +31,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 class GitLinkTest {
 
   @ParameterizedTest
-  @ValueSource(strings = {"test_simple", "test_empty3", "test_with_all-1", "test_with_all-2", "test_with_branch-2", "test_with_link_text", "test_with_branch-1"})
+  @ValueSource(strings = {"test_simple", "test_empty3", "test_with_all-1", "test_with_all-2", "test_with_branch-2", "test_with_link_text", "test_with_branch-1", "test_browse"})
   void testNoExpectedLogs(String name) throws Exception {
     List<LogRecord> logs = runTest(name);
     assertThat(logs).isEmpty();

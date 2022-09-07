@@ -98,6 +98,8 @@ The mode can be:
 * `viewdir`: view a directory.
 * `edit`: edit a file.
 
+Alternatively to `view` or `viewdir` the mode can be set to `browse` to be compatible with some git servers.
+
 When the <<sec-target>> ends with a slash (`/`), the defined mode is ignored and `viewdir` is used.
 
 The value can be defined as `git-link-mode` attribute in the document.
