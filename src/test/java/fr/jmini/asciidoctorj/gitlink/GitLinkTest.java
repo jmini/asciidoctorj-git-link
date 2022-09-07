@@ -25,12 +25,15 @@ import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.log.LogRecord;
 import org.asciidoctor.log.Severity;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class GitLinkTest {
 
-  @Test
-  void testSimple() throws Exception {
-    List<LogRecord> logs = runTest("test_simple");
+  @ParameterizedTest
+  @ValueSource(strings = {"test_simple", "test_empty3", "test_with_all-1", "test_with_all-2", "test_with_branch-2", "test_with_link_text", "test_with_branch-1"})
+  void testNoExpectedLogs(String name) throws Exception {
+    List<LogRecord> logs = runTest(name);
     assertThat(logs).isEmpty();
   }
 
@@ -53,12 +56,6 @@ class GitLinkTest {
   }
 
   @Test
-  void testEmpty3() throws Exception {
-    List<LogRecord> logs = runTest("test_empty3");
-    assertThat(logs).isEmpty();
-  }
-
-  @Test
   void testRepositoryMissing() throws Exception {
     List<LogRecord> logs = runTest("test_repository_missing");
     assertThat(logs).hasSize(2);
@@ -68,36 +65,6 @@ class GitLinkTest {
     LogRecord log2 = logs.get(1);
     assertThat(log2.getSeverity()).isEqualTo(Severity.DEBUG);
     assertThat(log2.getMessage()).isEqualTo("git-link: The mode is not defined, using 'view' as fallback.");
-  }
-
-  @Test
-  void testWithBranch1() throws Exception {
-    List<LogRecord> logs = runTest("test_with_branch-1");
-    assertThat(logs).isEmpty();
-  }
-
-  @Test
-  void testWithBranch2() throws Exception {
-    List<LogRecord> logs = runTest("test_with_branch-2");
-    assertThat(logs).isEmpty();
-  }
-
-  @Test
-  void testWithLinkText() throws Exception {
-    List<LogRecord> logs = runTest("test_with_link_text");
-    assertThat(logs).isEmpty();
-  }
-
-  @Test
-  void testWithAll1() throws Exception {
-    List<LogRecord> logs = runTest("test_with_all-1");
-    assertThat(logs).isEmpty();
-  }
-
-  @Test
-  void testWithAll2() throws Exception {
-    List<LogRecord> logs = runTest("test_with_all-2");
-    assertThat(logs).isEmpty();
   }
 
   private List<LogRecord> runTest(String fileName) throws IOException, URISyntaxException {
