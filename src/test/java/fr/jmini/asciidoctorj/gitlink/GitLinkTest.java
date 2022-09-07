@@ -26,16 +26,16 @@ import org.asciidoctor.log.LogRecord;
 import org.asciidoctor.log.Severity;
 import org.junit.jupiter.api.Test;
 
-public class GitLinkTest {
+class GitLinkTest {
 
   @Test
-  public void testSimple() throws Exception {
+  void testSimple() throws Exception {
     List<LogRecord> logs = runTest("test_simple");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testEmpty() throws Exception {
+  void testEmpty() throws Exception {
     List<LogRecord> logs = runTest("test_empty");
     assertThat(logs).hasSize(1);
     LogRecord log = logs.get(0);
@@ -44,7 +44,7 @@ public class GitLinkTest {
   }
 
   @Test
-  public void testEmpty2() throws Exception {
+  void testEmpty2() throws Exception {
     List<LogRecord> logs = runTest("test_empty2");
     assertThat(logs).hasSize(1);
     LogRecord log = logs.get(0);
@@ -53,13 +53,13 @@ public class GitLinkTest {
   }
 
   @Test
-  public void testEmpty3() throws Exception {
+  void testEmpty3() throws Exception {
     List<LogRecord> logs = runTest("test_empty3");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testRepositoryMissing() throws Exception {
+  void testRepositoryMissing() throws Exception {
     List<LogRecord> logs = runTest("test_repository_missing");
     assertThat(logs).hasSize(2);
     LogRecord log1 = logs.get(0);
@@ -71,31 +71,31 @@ public class GitLinkTest {
   }
 
   @Test
-  public void testWithBranch1() throws Exception {
+  void testWithBranch1() throws Exception {
     List<LogRecord> logs = runTest("test_with_branch-1");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testWithBranch2() throws Exception {
+  void testWithBranch2() throws Exception {
     List<LogRecord> logs = runTest("test_with_branch-2");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testWithLinkText() throws Exception {
+  void testWithLinkText() throws Exception {
     List<LogRecord> logs = runTest("test_with_link_text");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testWithAll1() throws Exception {
+  void testWithAll1() throws Exception {
     List<LogRecord> logs = runTest("test_with_all-1");
     assertThat(logs).isEmpty();
   }
 
   @Test
-  public void testWithAll2() throws Exception {
+  void testWithAll2() throws Exception {
     List<LogRecord> logs = runTest("test_with_all-2");
     assertThat(logs).isEmpty();
   }
